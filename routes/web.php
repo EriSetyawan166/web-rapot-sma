@@ -17,12 +17,18 @@ Route::get('/', function () {
     return (redirect()->intended('login'));
 });
 
+
+
 Route::get('login', 'App\Http\Controllers\AuthController@index')->name('login');
 Route::post('proses_login', 'App\Http\Controllers\AuthController@proses_login');
 Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout');
 
 // Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function(){
+Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+});
+
+Route::group(['middleware' => ['auth','cekleveluser'], 'prefix' => 'user'], function(){
+    Route::get('dashboard', 'App\Http\Controllers\DashboardUserController@index')->name('dashboard');
 });
