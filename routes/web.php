@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\RaporController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,8 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' => 'admin'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
     Route::resource('siswa', SiswaController::class);
+    Route::resource('matpel', MataPelajaranController::class);
+    Route::resource('rapor', RaporController::class);
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){

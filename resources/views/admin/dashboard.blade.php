@@ -54,16 +54,32 @@
                 MENU
             </div>
 
+
+
             <li class="nav-item {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
+
                 <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-house"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
+
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Siswa</span></a>
+            </li>
+
+            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('matpel.index')}}">
+                    <i class="fas fa-fw fa-book"></i>
+                    <span>Mata Pelajaran</span></a>
+            </li>
+
+            <li class="nav-item {{ (request()->is('rapor')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('rapor.index')}}">
+                    <i class="fas fa-fw fa-user-graduate"></i>
+                    <span>Rapor</span></a>
             </li>
 
 
@@ -86,6 +102,7 @@
 
             <!-- Main Content -->
             <div id="content">
+
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

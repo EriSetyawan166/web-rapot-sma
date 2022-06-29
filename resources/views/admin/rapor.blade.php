@@ -54,16 +54,20 @@
                 MENU
             </div>
 
+
+
             <li class="nav-item {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
+
                 <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-house"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('admin/siswa')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
+
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
-                <span>Siswa</span></a>
+                    <span>Siswa</span></a>
             </li>
 
             <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
@@ -98,6 +102,7 @@
 
             <!-- Main Content -->
             <div id="content">
+
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -177,10 +182,13 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Rapor</h1>
                     </div>
 
+                    <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card shadow mb-4">
@@ -260,7 +268,7 @@
                         </div>
                     </div>
 
-                    <!-- Page Heading -->
+
 
                     <!-- Content Row -->
 
