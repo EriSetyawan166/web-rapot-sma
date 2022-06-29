@@ -65,6 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cekleveluser' => \App\Http\Middleware\CeklevelUser::class,
         'cekleveladmin' => \App\Http\Middleware\CeklevelAdmin::class,
-
+        'sweetalert'=>\RealRashid\SweetAlert\ToSweetAlert::class,
     ];
 }

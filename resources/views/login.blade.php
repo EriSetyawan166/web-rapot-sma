@@ -50,29 +50,39 @@
 
                                         <br>
                                         <br>
+                                        @if (session('flash_message_error'))
+                                            <div class="alert alert-danger border-left-danger" role="alert">
+                                                <strong>Username/Password salah!</strong>
+
+                                            </div>
+                                        @endif
                                     <form class="user" method="POST" action="{{url('proses_login')}}">
                                         {{ csrf_field() }}
-
-
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 id="username" name="username"
-                                                placeholder="Masukkan UserID">
+                                                placeholder="Masukkan UserID" >
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Masukkan Password">
+                                                id="password" name="password" placeholder="Masukkan Password" >
                                         </div>
                                         <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Login
                                         </button>
+                                        @if (!session('flash_message_error'))
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <br>
+                                        @else
+                                        <br>
+
+
+                                        @endif
 
                                     </form>
-                                    <hr>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
+
                                 </div>
                             </div>
                         </div>

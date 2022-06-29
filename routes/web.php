@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,10 +26,11 @@ Route::get('logout', 'App\Http\Controllers\AuthController@logout')->name('logout
 
 // Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
 
-Route::group(['middleware' => ['auth', 'cekleveladmin'], 'prefix' => 'admin'], function(){
+Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' => 'admin'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::resource('siswa', SiswaController::class);
 });
 
-Route::group(['middleware' => ['auth','cekleveluser'], 'prefix' => 'user'], function(){
+Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardUserController@index')->name('dashboard');
 });

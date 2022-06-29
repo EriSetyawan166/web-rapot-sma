@@ -60,10 +60,10 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('admin/siswa')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Siswa</span></a>
+                <span>Siswa</span></a>
             </li>
 
 
@@ -165,53 +165,90 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Siswa</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
+                                    <div class="table-responsive mt-3">
+                                        <table id="datatablesSimple" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nis</th>
+                                                    <th>Username</th>
+                                                    <th>Nama</th>
+                                                    <th>Alamat</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>10930114</td>
+                                                    <td>kjdlsf</td>
+                                                    <td>sdijfsldf</td>
+                                                    <td>jl kshdfksadhf</td>
+                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>123123</td>
+                                                    <td>dfsfaa</td>
+                                                    <td>gsdfgas</td>
+                                                    <td>jl agdsdfasfd</td>
+                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>3434235</td>
+                                                    <td>sdsgsdfg</td>
+                                                    <td>gsdfssfdsfgas</td>
+                                                    <td>jl kjsdkjdfkjad</td>
+                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>3434235</td>
+                                                    <td>sdsgsdfg</td>
+                                                    <td>lidskhdsadfjkh</td>
+                                                    <td>jl asdkjhfkf</td>
+                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>2047545</td>
+                                                    <td>kghrgrh</td>
+                                                    <td>hrgyrhl</td>
+                                                    <td>jl lheihlkthljkth   </td>
+                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Siswa</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas-solid fas fa-user fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Mata Pelajaran</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">13</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fas fa-book fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
 
                     <!-- Content Row -->
 
