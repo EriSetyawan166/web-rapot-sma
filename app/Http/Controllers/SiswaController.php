@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
@@ -34,7 +36,21 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $siswa = new Siswa();
+        $user = new User();
+        $siswa->nis = $request->nis;
+        $siswa->nama = $request->nama;
+        $siswa->alamat = $request->alamat;
+        $user->username = $request->username;
+        $user->password = bcrypt($request->password);
+        $user->nis_siswa = $request->nis;
+
+
+        $siswa->save();
+        $user->save();
+        return redirect()->intended('admin\dashboard')->with('success', 'Data Berhasil ditambah');
+
+
     }
 
     /**

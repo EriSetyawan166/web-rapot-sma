@@ -155,7 +155,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -167,7 +167,7 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -190,79 +190,67 @@
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-xl-12">
+                        <div class="col-xl-6">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Input Rapor</h6>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
-                                    <div class="table-responsive mt-3">
-                                        <table id="datatablesSimple" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nis</th>
-                                                    <th>Username</th>
-                                                    <th>Nama</th>
-                                                    <th>Alamat</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>10930114</td>
-                                                    <td>kjdlsf</td>
-                                                    <td>sdijfsldf</td>
-                                                    <td>jl kshdfksadhf</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>123123</td>
-                                                    <td>dfsfaa</td>
-                                                    <td>gsdfgas</td>
-                                                    <td>jl agdsdfasfd</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>gsdfssfdsfgas</td>
-                                                    <td>jl kjsdkjdfkjad</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>lidskhdsadfjkh</td>
-                                                    <td>jl asdkjhfkf</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>2047545</td>
-                                                    <td>kghrgrh</td>
-                                                    <td>hrgyrhl</td>
-                                                    <td>jl lheihlkthljkth   </td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
+                                    <button class="btn btn-primary">
+                                        <i class="fa-solid fa-plus"></i> Tambah nilai
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                        </table>
-                                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Siswa</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="">
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%">
+                                                <option selected disabled value="">Pilih Siswa</option>
+                                                <option value="">Cuman Testing</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-primary">
+                                            Tampilkan
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Mata Pelajaran</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form action="">
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%">
+                                                <option selected disabled value="">Pilih Matpel</option>
+                                                <option value="">Cuman Testing</option>
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-primary">
+                                            Tampilkan
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

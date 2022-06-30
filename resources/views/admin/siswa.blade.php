@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">
@@ -150,7 +151,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                {{-- <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -162,7 +163,7 @@
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Activity Log
                                 </a>
-                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -191,7 +192,46 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Mata Pelajaran</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{route('siswa.store')}}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <input type="text" id="nis" name="nis" placeholder="Masukkan nomor NIS" class="form-control" maxlength="10" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
+                                                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" id="password" name="password" placeholder="Masukkan password" class="form-control" maxlength="10" required autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    </div>
                                     <div class="table-responsive mt-3">
                                         <table id="datatablesSimple" class="table table-bordered">
                                             <thead>
