@@ -11,4 +11,9 @@ class Siswa extends Model
     protected $primarykey = "nis";
     protected $fillable = ['nis','nama','alamat'];
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
