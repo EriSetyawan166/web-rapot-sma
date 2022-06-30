@@ -144,7 +144,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('nama')}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -245,54 +245,54 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>10930114</td>
-                                                    <td>kjdlsf</td>
-                                                    <td>sdijfsldf</td>
-                                                    <td>jl kshdfksadhf</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>123123</td>
-                                                    <td>dfsfaa</td>
-                                                    <td>gsdfgas</td>
-                                                    <td>jl agdsdfasfd</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>gsdfssfdsfgas</td>
-                                                    <td>jl kjsdkjdfkjad</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>lidskhdsadfjkh</td>
-                                                    <td>jl asdkjhfkf</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>2047545</td>
-                                                    <td>kghrgrh</td>
-                                                    <td>hrgyrhl</td>
-                                                    <td>jl lheihlkthljkth   </td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
+                                                @php
+                                                    $i = 1;
+                                                @endphp
+                                                @foreach ($data_siswa as $sw)
+                                                    <tr>
+                                                        <td>{{$i}}</td>
+                                                        <td>{{$sw->siswa->nis}}</td>
+                                                        <td>{{$sw->username}}</td>
+                                                        <td>{{$sw->siswa->nama}}</td>
+                                                        <td>{{$sw->siswa->alamat}}</td>
+                                                        <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a>
+                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-trash to-square"></i>Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                @endforeach
 
+                                                @foreach ($data_siswa as $sw)
+                                                <div class="modal fade" id="hapus_siswa{{$sw->siswa->nis}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                            <form action="{{url('admin/siswa', $sw->siswa->nis)}}" method="POST">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button class="btn btn-danger" type="submit">hapus</button>
+                                                            </form>
+
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                @endforeach
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

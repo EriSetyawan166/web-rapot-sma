@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardUserController extends Controller
 {
@@ -13,7 +15,9 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        return view('user\dashboard');
+        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
+        // @dd($siswa->nama);
+        return view('user\dashboard', compact('siswa'));
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class SiswaController extends Controller
 {
     /**
@@ -15,7 +15,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('admin.siswa');
+        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
+        $data_siswa = User::all();
+
+        return view('admin.siswa',compact('siswa', 'data_siswa'));
     }
 
     /**
@@ -48,7 +51,7 @@ class SiswaController extends Controller
 
         $siswa->save();
         $user->save();
-        return redirect()->intended('admin\dashboard')->with('success', 'Data Berhasil ditambah');
+        return back()->with('success', 'Data Berhasil ditambah');
 
 
     }
@@ -84,7 +87,7 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -95,6 +98,9 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // @dd($id);
+        $siswa = Siswa::where('nis','=',$id)->firstOrFail();
+        $siswa->delete();
+        return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

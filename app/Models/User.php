@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function siswa()
     {
-        return $this->hasOne(Siswa::class, 'nis');
+        return $this->belongsTo(Siswa::class, 'nis_siswa','nis');
     }
 }
