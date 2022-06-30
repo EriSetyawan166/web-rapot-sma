@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('role_id')->default('0');
             $table->unsignedBigInteger('nis_siswa');
-            $table->foreign('nis_siswa')->references('nis')->on('siswa');
+            $table->foreign('nis_siswa')->references('nis')->on('siswa')->nullOnDelete();
             $table->rememberToken();
             $table->timestamps();
         });
