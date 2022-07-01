@@ -189,7 +189,9 @@
                     </div>
 
                     <!-- Content Row -->
+
                     <div class="row">
+
                         <div class="col-xl-6">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
@@ -198,9 +200,57 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Input Rapor</h6>
                                 </div>
                                 <div class="card-body">
-                                    <button class="btn btn-primary">
-                                        <i class="fa-solid fa-plus"></i> Tambah nilai
-                                    </button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Mata Pelajaran</button>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rapor</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{route('rapor.store')}}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%" name="nis" id="nis" required>
+                                                        <option selected disabled value="">Pilih Siswa</option>
+                                                        @foreach ($data_siswa as $item)
+                                                        @if ($item->nama == 'admin' )
+                                                            @continue
+                                                        @endif
+                                                        <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%" name="kode_matpel" id="kode_matpel" required>
+                                                        <option selected disabled value="">Pilih Mata Pelajaran</option>
+                                                        @foreach ($data_matpel as $item)
+                                                        <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
+                                                    <textarea class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan"></textarea>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -215,14 +265,19 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Siswa</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form action="">
+                                    <form action="{{route('rapor-detail.index')}}">
                                         <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="id" id="id">
                                                 <option selected disabled value="">Pilih Siswa</option>
-                                                <option value="">Cuman Testing</option>
+                                                @foreach ($data_siswa as $item)
+                                                @if ($item->nama == 'admin' )
+                                                    @continue
+                                                @endif
+                                                <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" >
                                             Tampilkan
                                         </button>
                                     </form>

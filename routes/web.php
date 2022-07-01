@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\RaporController;
+use App\Http\Controllers\RaporDetailController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,8 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('siswa', SiswaController::class);
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
+    Route::resource('rapor-detail', RaporDetailController::class);
+
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){

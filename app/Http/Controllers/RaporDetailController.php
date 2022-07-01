@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class SiswaController extends Controller
+
+class RaporDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $id = $request->id;
+        // @dd($request);
         $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
-        $data_siswa = User::all();
-        
+        $data_siswa = Siswa::where('nis','=',$id)->firstOrFail();
 
-        return view('admin.siswa',compact('siswa', 'data_siswa'));
+
+
+        return view('admin.rapor-siswa', compact('siswa', 'data_siswa'));
     }
 
     /**
@@ -40,21 +43,7 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $siswa = new Siswa();
-        $user = new User();
-        $siswa->nis = $request->nis;
-        $siswa->nama = $request->nama;
-        $siswa->alamat = $request->alamat;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->nis_siswa = $request->nis;
-
-
-        $siswa->save();
-        $user->save();
-        return back()->with('success', 'Data Berhasil ditambah');
-
-
+        //
     }
 
     /**
@@ -76,7 +65,7 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -88,9 +77,7 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $siswa = Siswa::findorfail($id);
-        $siswa->update($request->all());
-        return back()->with('success', 'Data Berhasil Diubah!');
+        //
     }
 
     /**
@@ -101,9 +88,6 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        // @dd($id);
-        $siswa = Siswa::where('nis','=',$id)->firstOrFail();
-        $siswa->delete();
-        return back()->with('info', 'Data Berhasil Dihapus');
+        //
     }
 }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('kode');
             $table->string('nama',50);
             $table->integer('kkm');
+            $table->string('kelompok');
             $table->timestamps();
         });
     }

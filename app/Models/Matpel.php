@@ -9,6 +9,13 @@ class Matpel extends Model
 {
     protected $table = "matpel";
     protected $primaryKey = "kode";
-    protected $fillable = ['kode','nama','kkm'];
+    protected $fillable = ['kode','nama','kkm', 'kelompok'];
+    public $incrementing = false;
     use HasFactory;
+
+    public function nilai()
+    {
+        return $this->hasMany(Siswa::class);
+    }
+
 }

@@ -245,10 +245,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+
                                                 @php
                                                     $i = 1;
                                                 @endphp
                                                 @foreach ($data_siswa as $sw)
+                                                @if ($sw->username == 'admin' )
+                                                            @continue
+                                                        @endif
                                                     <tr>
                                                         <td>{{$i}}</td>
                                                         <td>{{$sw->siswa->nis}}</td>

@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">
@@ -60,14 +61,14 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('admin/siswa')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Siswa</span></a>
+                <span>Siswa</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('admin/matpel')) ? 'active' : '' }}">
-                <a class="nav-link " href="">
+            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('matpel.index')}}">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Mata Pelajaran</span></a>
             </li>
@@ -143,14 +144,26 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('nama')}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-
+                                {{-- <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>
+                                <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -165,35 +178,31 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Mata Pelajaran</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Siswa</h1>
                     </div>
 
-                    <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Mata Pelajaran</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Rapor Siswa {{$data_siswa->nama}}</h6>
                                 </div>
-                                <!-- Card Body -->
+
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Mata Pelajaran</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Data Rapor</button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Mata Pelajaran</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rapor</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{route('matpel.store')}}" method="POST">
+                                        <form action="" method="POST">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
@@ -225,113 +234,52 @@
                                     </div>
 
                                     <div class="table-responsive mt-3">
-                                        <table id="datatablesSimple" class="table table-bordered">
+                                        <table id="datatableSimple" class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Kode Matpel</th>
-                                                    <th>Nama Matpel</th>
+                                                    <th>Mata Pelajaran</th>
                                                     <th>KKM</th>
-                                                    <th>Kelompok</th>
-                                                    <th>Option</th>
+                                                    <th>Nilai</th>
+                                                    <th>Predikat</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i = 1;
-                                                @endphp
-                                                @foreach ($matpel as $mp)
-                                                    <tr>
-                                                        <td>{{$i}}</td>
-                                                        <td>{{$mp->kode}}</td>
-                                                        <td>{{$mp->nama}}</td>
-                                                        <td>{{$mp->kkm}}</td>
-                                                        <td>{{$mp->kelompok}}</td>
-                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$mp->kode}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$mp->kode}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
-                                                        </td>
-                                                    </tr>
-                                                    @php
-                                                        $i++;
-                                                    @endphp
-                                                @endforeach
-
-                                                @foreach ($matpel as $mp)
-                                                <div class="modal fade" id="hapus_siswa{{$mp->kode}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/matpel', $mp->kode)}}" method="POST">
-                                                                {{ csrf_field() }}
-                                                                <input type="hidden" name="_method" value="DELETE">
-                                                                <button class="btn btn-danger" type="submit">hapus</button>
-                                                            </form>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="modal fade" id="ubah_siswa{{$mp->kode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Mata Pelajaran</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form action="{{url('admin/matpel')}}/{{$mp->kode}}" method="POST">
-                                                            @csrf
-                                                            <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Mata Pelajaran" class="form-control" required autocomplete="off" value="{{$mp->kode}}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama matpel" class="form-control" required autocomplete="off" value="{{$mp->nama}}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan nilai KKM" class="form-control" required autocomplete="off" value="{{$mp->kkm}}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <select class="form-control select2" style="width: 100%" name="kelompok" id="kelompok" required>
-                                                                        <option selected disabled value="">Pilih Kelompok</option>
-                                                                        <option @if ($mp->kelompok == "Kelompok A ( Umum )") @selected(true) @endif value="Kelompok A ( Umum )">Kelompok A ( Umum )</option>
-                                                                        <option @if ($mp->kelompok == "Kelompok B ( Umum )") @selected(true) @endif value="Kelompok B ( Umum )">Kelompok B ( Umum )</option>
-                                                                        <option @if ($mp->kelompok == "Kelompok C ( Peminatan )") @selected(true) @endif value="Kelompok C ( Peminatan )">Kelompok C ( Peminatan )</option>
-                                                                    </select>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                                        <input type="hidden" name="_method" value="PUT">
-                                                                    <button class="btn btn-warning" type="submit">Ubah</button>
-                                                            </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
-
-
-                                                @endforeach
-
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Mata Pelajaran</td>
+                                                    <td>KKM</td>
+                                                    <td>Nilai</td>
+                                                    <td>Predikat</td>
+                                                    <td>Deskripsi</td>
+                                                    <td>Keterangan</td>
+                                                    <td>Aksi</td>
+                                                </tr>
                                             </tbody>
+                                            <tbody>
+                                                <tr>
+                                                    <td>No</td>
+                                                    <td>Mata Pelajaran</td>
+                                                    <td>KKM</td>
+                                                    <td>Nilai</td>
+                                                    <td>Predikat</td>
+                                                    <td>Deskripsi</td>
+                                                    <td>Keterangan</td>
+                                                    <td>Aksi</td>
+                                                </tr>
+                                            </tbody>
+
                                         </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Page Heading -->
 
                     <!-- Content Row -->
 

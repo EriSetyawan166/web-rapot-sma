@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KelompokMatpel;
 use App\Models\Matpel;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,7 @@ class MataPelajaranController extends Controller
         $matpel->kode = $request->kode;
         $matpel->nama = $request->nama;
         $matpel->kkm = $request->kkm;
+        $matpel->kelompok = $request->kelompok;
         $matpel->save();
         return back()->with('success', 'Data Berhasil ditambah');
     }
