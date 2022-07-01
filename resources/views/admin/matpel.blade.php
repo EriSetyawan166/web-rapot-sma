@@ -182,7 +182,40 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Tambah Mata Pelajaran</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Mata Pelajaran</button>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Mata Pelajaran</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{route('matpel.store')}}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Matkul" class="form-control" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Mata Pelajaran" class="form-control" required autocomplete="off">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan KKM" class="form-control" required autocomplete="off">
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    </div>
+
                                     <div class="table-responsive mt-3">
                                         <table id="datatablesSimple" class="table table-bordered">
                                             <thead>
@@ -190,54 +223,90 @@
                                                     <th>No</th>
                                                     <th>Kode Matpel</th>
                                                     <th>Nama Matpel</th>
-                                                    <th>Akm</th>
+                                                    <th>KKM</th>
                                                     <th>Option</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>10930114</td>
-                                                    <td>kjdlsf</td>
-                                                    <td>sdijfsldf</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>123123</td>
-                                                    <td>dfsfaa</td>
-                                                    <td>gsdfgas</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>gsdfssfdsfgas</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>3434235</td>
-                                                    <td>sdsgsdfg</td>
-                                                    <td>lidskhdsadfjkh</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>2047545</td>
-                                                    <td>kghrgrh</td>
-                                                    <td>hrgyrhl</td>
-                                                    <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a><a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash-can"></i>hapus</a></td>
-                                                </tr>
-                                            </tbody>
+                                                @php
+                                                    $i = 1;
+                                                @endphp
+                                                @foreach ($matpel as $mp)
+                                                    <tr>
+                                                        <td>{{$i}}</td>
+                                                        <td>{{$mp->kode}}</td>
+                                                        <td>{{$mp->nama}}</td>
+                                                        <td>{{$mp->kkm}}</td>
+                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$mp->kode}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
+                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$mp->kode}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
+                                                @endforeach
 
+                                                @foreach ($matpel as $mp)
+                                                <div class="modal fade" id="hapus_siswa{{$mp->kode}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                            <form action="{{url('admin/matpel', $mp->kode)}}" method="POST">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button class="btn btn-danger" type="submit">hapus</button>
+                                                            </form>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal fade" id="ubah_siswa{{$mp->kode}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Mata Pelajaran</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{url('admin/matpel')}}/{{$mp->kode}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Mata Pelajaran" class="form-control" required autocomplete="off" value="{{$mp->kode}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama matpel" class="form-control" required autocomplete="off" value="{{$mp->nama}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan nilai KKM" class="form-control" required autocomplete="off" value="{{$mp->kkm}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                                        <input type="hidden" name="_method" value="PUT">
+                                                                    <button class="btn btn-warning" type="submit">Ubah</button>
+                                                            </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+
+
+                                                @endforeach
+
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>

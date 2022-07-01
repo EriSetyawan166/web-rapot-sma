@@ -220,7 +220,7 @@
                                                     <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat"></textarea>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="password" id="password" name="password" placeholder="Masukkan password" class="form-control" maxlength="10" required autocomplete="off">
+                                                    <input type="password" id="password" name="password" placeholder="Masukkan password" class="form-control" required autocomplete="off">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -255,8 +255,8 @@
                                                         <td>{{$sw->username}}</td>
                                                         <td>{{$sw->siswa->nama}}</td>
                                                         <td>{{$sw->siswa->alamat}}</td>
-                                                        <td class="d-flex justify-content-left"><a href="#" class="btn btn-warning btn-sm mr-1"><i class="fa-solid fa-pen-to-square"></i>ubah</a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-trash to-square"></i>Hapus</a>
+                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
+                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
                                                         </td>
                                                     </tr>
                                                     @php
@@ -290,7 +290,49 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="modal fade" id="ubah_siswa{{$sw->siswa->nis}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Siswa</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{url('admin/siswa')}}/{{$sw->siswa->nis}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="text" id="nis" name="nis" placeholder="Masukkan nomor NIS" class="form-control" maxlength="10" required autocomplete="off" value="{{$sw->siswa->nis}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" value="{{$sw->username}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" value="{{$sw->siswa->nama}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
+                                                                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat">{{$sw->siswa->alamat}}</textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="password" id="password" name="password" placeholder="Masukkan password baru" class="form-control" required autocomplete="off">
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                                        <input type="hidden" name="_method" value="PUT">
+                                                                    <button class="btn btn-warning" type="submit">Ubah</button>
+                                                            </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+
+
                                                 @endforeach
+
+
 
                                             </tbody>
                                         </table>

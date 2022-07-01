@@ -75,7 +75,7 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -87,7 +87,9 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $siswa = Siswa::findorfail($id);
+        $siswa->update($request->all());
+        return back()->with('success', 'Data Berhasil Diubah!');
     }
 
     /**

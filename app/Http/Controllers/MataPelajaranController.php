@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Matpel;
 use Illuminate\Http\Request;
 
 class MataPelajaranController extends Controller
@@ -13,7 +14,8 @@ class MataPelajaranController extends Controller
      */
     public function index()
     {
-        return view('admin.matpel');
+        $matpel = Matpel::all();
+        return view('admin.matpel', compact('matpel'));
     }
 
     /**
@@ -34,7 +36,12 @@ class MataPelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $matpel = new Matpel();
+        $matpel->kode = $request->kode;
+        $matpel->nama = $request->nama;
+        $matpel->kkm = $request->kkm;
+        $matpel->save();
+        return back()->with('success', 'Data Berhasil ditambah');
     }
 
     /**
@@ -68,7 +75,9 @@ class MataPelajaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $matpel = Matpel::findorfail($id);
+        $matpel->update($request->all());
+        return back()->with('success', 'Data Berhasil Diubah!');
     }
 
     /**
@@ -79,6 +88,8 @@ class MataPelajaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $matpel = Matpel::where('kode','=',$id)->firstOrFail();
+        $matpel->delete();
+        return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

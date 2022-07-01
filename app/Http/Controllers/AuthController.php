@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Siswa;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -41,6 +42,7 @@ class AuthController extends Controller
             if (Auth::attempt($ceklogin)){
 
                 $session = User::all()->where('username', $request->username)->first();
+                $siswa = Siswa::all()->where('nis', 1)->first();
                 // @dd($session->role_id);
 
                 $request->session()->regenerate();
@@ -52,9 +54,9 @@ class AuthController extends Controller
 
 
                 if ($session->role_id == 1) {
-                    return redirect()->intended('admin\dashboard')->with('success', 'Selamat Datang');
+                    return redirect()->intended('admin\dashboard')->with('success', 'Selamat Datang '. $session->siswa->nama);
                 } else{
-                    return redirect()->intended('user\dashboard')->with('success', 'Selamat Datang');
+                    return redirect()->intended('user\dashboard')->with('success', 'Selamat Datang '. $session->siswa->nama);
                 }
 
             }

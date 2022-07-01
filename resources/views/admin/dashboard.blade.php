@@ -217,7 +217,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Total Mata Pelajaran</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">13</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_matpel}}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fa-solid fas fa-book fa-2x"></i>
