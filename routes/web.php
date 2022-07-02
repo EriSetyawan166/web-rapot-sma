@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
     Route::resource('rapor-detail', RaporDetailController::class);
+    Route::get('rapor-detail/{matpelId}/{siswaId}', [
+        'as' => 'rapor-detail.destroy',
+        'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
+    ]);
 
 });
 

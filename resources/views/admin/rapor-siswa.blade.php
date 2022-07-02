@@ -187,51 +187,24 @@
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Rapor Siswa {{$data_siswa->nama}}</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Rapor Siswa</h6>
                                 </div>
 
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Data Rapor</button>
-
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rapor</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="" method="POST">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Matkul" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Mata Pelajaran" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan KKM" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="kelompok" id="kelompok" required>
-                                                        <option selected disabled value="">Pilih Kelompok</option>
-                                                        <option value="Kelompok A ( Umum )">Kelompok A ( Umum )</option>
-                                                        <option value="Kelompok B ( Umum )">Kelompok B ( Umum )</option>
-                                                        <option value="Kelompok C ( Peminatan )">Kelompok C ( Peminatan )</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    </div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>Nama</td>
+                                                <td>: {{$data_siswa->nama}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Nis</td>
+                                                <td>: {{$data_siswa->nis}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 
                                     <div class="table-responsive mt-3">
                                         <table id="datatableSimple" class="table table-bordered">
@@ -248,30 +221,56 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php
+                                                    $i=1;
+                                                @endphp
+                                                @foreach ($data_nilai as $dn )
                                                 <tr>
-                                                    <td>No</td>
-                                                    <td>Mata Pelajaran</td>
-                                                    <td>KKM</td>
-                                                    <td>Nilai</td>
-                                                    <td>Predikat</td>
-                                                    <td>Deskripsi</td>
-                                                    <td>Keterangan</td>
-                                                    <td>Aksi</td>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                    <td><a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a></td>
                                                 </tr>
-                                            </tbody>
-                                            <tbody>
-                                                <tr>
-                                                    <td>No</td>
-                                                    <td>Mata Pelajaran</td>
-                                                    <td>KKM</td>
-                                                    <td>Nilai</td>
-                                                    <td>Predikat</td>
-                                                    <td>Deskripsi</td>
-                                                    <td>Keterangan</td>
-                                                    <td>Aksi</td>
-                                                </tr>
-                                            </tbody>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                                @endforeach
 
+                                                @foreach ($data_nilai as $dn)
+                                                <div class="modal fade" id="hapus_siswa{{$dn->kode_matpel}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                            <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$dn->nis_siswa}}" method="GET">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="_method">
+                                                                <button class="btn btn-danger" type="submit">hapus</button>
+                                                            </form>
+
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
