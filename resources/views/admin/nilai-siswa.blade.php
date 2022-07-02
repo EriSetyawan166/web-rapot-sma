@@ -21,6 +21,7 @@
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
 
+
 </head>
 
 <body id="page-top">
@@ -54,20 +55,16 @@
                 MENU
             </div>
 
-
-
             <li class="nav-item {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
-
                 <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-house"></i>
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
-
+            <li class="nav-item {{ (request()->is('admin/siswa')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Siswa</span></a>
+                <span>Siswa</span></a>
             </li>
 
             <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
@@ -102,7 +99,6 @@
 
             <!-- Main Content -->
             <div id="content">
-
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -148,7 +144,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('nama')}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -182,138 +178,104 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Nilai Siswa</h1>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card shadow mb-4">
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
+                                </div>
+
+                                <div class="card-body">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <td>Nama Mata Pelajaran</td>
+                                                <td>: {{$data_matpel->nama}}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>KKM</td>
+                                                <td>: {{$data_matpel->kkm}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-responsive mt-3">
+                                        <table id="datatableSimple" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Nama Siswa</th>
+                                                    <th>Nilai</th>
+                                                    <th>Predikat</th>
+                                                    <th>Keterangan</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            @php
+                                                $i = 1;
+                                            @endphp
+                                            @foreach ($data_nilai as $dn)
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{$i}}</td>
+                                                        <td>{{$dn->siswa->nama}}</td>
+                                                        <td>{{$dn->nilai}}</td>
+                                                        <td>{{$dn->predikat}}</td>
+                                                        <td>@if ($dn->nilai >= $data_matpel->kkm)
+                                                            Terpenuhi
+                                                            @else
+                                                            Tidak Terpenuhi
+                                                            @endif
+                                                        </td>
+                                                        <td><a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$dn->siswa->nis}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a></td>
+                                                    </tr>
+                                                </tbody>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                            @endforeach
+
+                                            @foreach ($data_nilai as $dn)
+                                                <div class="modal fade" id="hapus_siswa{{$dn->siswa->nis}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                            <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$dn->nis_siswa}}" method="GET">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="_method">
+                                                                <button class="btn btn-danger" type="submit">hapus</button>
+                                                            </form>
+
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Rapor</h1>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Input Rapor</h6>
-                                </div>
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Nilai</button>
-
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rapor</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form action="{{route('rapor.store')}}" method="POST">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="nis" id="nis" required>
-                                                        <option selected disabled value="">Pilih Siswa</option>
-                                                        @foreach ($data_siswa as $item)
-                                                        @if ($item->nama == 'admin' )
-                                                            @continue
-                                                        @endif
-                                                        <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="kode_matpel" id="kode_matpel" required>
-                                                        <option selected disabled value="">Pilih Mata Pelajaran</option>
-                                                        @foreach ($data_matpel as $item)
-                                                        <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
-                                                    <textarea class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan"></textarea>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Siswa</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{route('rapor-detail.index')}}">
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="id" id="id">
-                                                <option selected disabled value="">Pilih Siswa</option>
-                                                @foreach ($data_siswa as $item)
-                                                @if ($item->nama == 'admin' )
-                                                    @continue
-                                                @endif
-                                                <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary" >
-                                            Tampilkan
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Mata Pelajaran</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{route('nilai-siswa.index')}}">
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="kode" id="kode">
-                                                <option selected disabled value="">Pilih Mata Pelajaran</option>
-                                                @foreach ($data_matpel as $item)
-                                                <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary">
-                                            Tampilkan
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
 
                     <!-- Content Row -->
 

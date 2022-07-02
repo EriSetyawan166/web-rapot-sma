@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MataPelajaranController;
+use App\Http\Controllers\NilaiSiswaController;
 use App\Http\Controllers\RaporController;
 use App\Http\Controllers\RaporDetailController;
 use App\Http\Controllers\SiswaController;
@@ -39,7 +40,11 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'as' => 'rapor-detail.destroy',
         'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
     ]);
-
+    Route::resource('nilai-siswa', NilaiSiswaController::class);
+    Route::get('nilai-siswa/{matpelId}/{siswaId}', [
+        'as' => 'nilai-siswa.destroy',
+        'uses' => 'App\Http\Controllers\NilaiSiswaController@destroy',
+    ]);
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){

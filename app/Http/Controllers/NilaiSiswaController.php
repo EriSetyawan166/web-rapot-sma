@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matpel;
-use App\Models\Nilai;
-use Illuminate\Support\Facades\DB;
 use App\Models\Siswa;
+use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RaporDetailController extends Controller
+
+class NilaiSiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +18,11 @@ class RaporDetailController extends Controller
      */
     public function index(Request $request)
     {
-        $id = $request->id;
-        // @dd($request);
+        $id = $request->kode;
+        $data_nilai = Nilai::all()->where('kode_matpel', '=', $id);
+        $data_matpel = Matpel::where('kode', '=', $id)->firstOrFail();
         $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
-        $data_siswa = Siswa::where('nis','=',$id)->firstOrFail();
-        $data_nilai = Nilai::all()->where('nis_siswa', '=' ,$id);
-        $data_matpel = Matpel::all();
-
-        return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai'));
+        return view('admin.nilai-siswa', compact('siswa', 'data_nilai', 'data_matpel'));
     }
 
     /**
@@ -91,8 +88,6 @@ class RaporDetailController extends Controller
      */
     public function destroy($id_matpel, $id_siswa)
     {
-
-
         $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }
