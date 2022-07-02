@@ -19,10 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'id',
-        'nama',
+        'username',
         'password',
         'role_id',
-        'nis_siswa',
+        'nisn_siswa',
     ];
 
     /**
@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function siswa()
     {
-        return $this->belongsTo(Siswa::class, 'nis_siswa','nis');
+        return $this->belongsTo(Siswa::class, 'nisn_siswa','nisn');
     }
 }

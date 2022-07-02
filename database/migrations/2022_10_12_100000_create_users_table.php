@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('role_id')->default('0');
-            $table->unsignedBigInteger('nis_siswa')->nullable();
-            $table->foreign('nis_siswa')->references('nis')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('nisn_siswa')->nullable();
+            $table->foreign('nisn_siswa')->references('nisn')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

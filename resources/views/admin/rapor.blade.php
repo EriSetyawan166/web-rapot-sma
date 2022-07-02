@@ -215,13 +215,13 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="nis" id="nis" required>
+                                                    <select class="form-control select2" style="width: 100%" name="nisn" id="nisn" required>
                                                         <option selected disabled value="">Pilih Siswa</option>
                                                         @foreach ($data_siswa as $item)
                                                         @if ($item->nama == 'admin' )
                                                             @continue
                                                         @endif
-                                                        <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
+                                                        <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -273,7 +273,7 @@
                                                 @if ($item->nama == 'admin' )
                                                     @continue
                                                 @endif
-                                                <option value="{{ $item->nis}}">{{$item->nis}} - {{ $item->nama}}</option>
+                                                <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

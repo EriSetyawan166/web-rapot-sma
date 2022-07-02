@@ -21,7 +21,7 @@ class NilaiSiswaController extends Controller
         $id = $request->kode;
         $data_nilai = Nilai::all()->where('kode_matpel', '=', $id);
         $data_matpel = Matpel::where('kode', '=', $id)->firstOrFail();
-        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
+        $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
         return view('admin.nilai-siswa', compact('siswa', 'data_nilai', 'data_matpel'));
     }
 
@@ -97,7 +97,7 @@ class NilaiSiswaController extends Controller
                 break;
         }
         $nilai->predikat = $hasil;
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
         // $nilai = Nilai::findOrFail($id);
         return back()->with('success', 'Data Berhasil Diubah!');
     }
@@ -110,7 +110,7 @@ class NilaiSiswaController extends Controller
      */
     public function destroy($id_matpel, $id_siswa)
     {
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->delete();
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

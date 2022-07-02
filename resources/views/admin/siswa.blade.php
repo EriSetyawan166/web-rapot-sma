@@ -207,7 +207,7 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <input type="text" id="nis" name="nis" placeholder="Masukkan nomor NIS" class="form-control" maxlength="10" required autocomplete="off">
+                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off">
@@ -237,7 +237,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Nis</th>
+                                                    <th>NISN</th>
                                                     <th>Username</th>
                                                     <th>Nama</th>
                                                     <th>Alamat</th>
@@ -255,12 +255,12 @@
                                                         @endif
                                                     <tr>
                                                         <td>{{$i}}</td>
-                                                        <td>{{$sw->siswa->nis}}</td>
+                                                        <td>{{$sw->siswa->nisn}}</td>
                                                         <td>{{$sw->username}}</td>
                                                         <td>{{$sw->siswa->nama}}</td>
                                                         <td>{{$sw->siswa->alamat}}</td>
-                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nis}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
+                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
+                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
                                                         </td>
                                                     </tr>
                                                     @php
@@ -269,7 +269,7 @@
                                                 @endforeach
 
                                                 @foreach ($data_siswa as $sw)
-                                                <div class="modal fade" id="hapus_siswa{{$sw->siswa->nis}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                <div class="modal fade" id="hapus_siswa{{$sw->siswa->nisn}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
@@ -283,7 +283,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/siswa', $sw->siswa->nis)}}" method="POST">
+                                                            <form action="{{url('admin/siswa', $sw->siswa->nisn)}}" method="POST">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <button class="btn btn-danger" type="submit">hapus</button>
@@ -294,7 +294,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="modal fade" id="ubah_siswa{{$sw->siswa->nis}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="ubah_siswa{{$sw->siswa->nisn}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
@@ -303,11 +303,11 @@
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{url('admin/siswa')}}/{{$sw->siswa->nis}}" method="POST">
+                                                        <form action="{{url('admin/siswa')}}/{{$sw->siswa->nisn}}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="nis" name="nis" placeholder="Masukkan nomor NIS" class="form-control" maxlength="10" required autocomplete="off" value="{{$sw->siswa->nis}}">
+                                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" value="{{$sw->siswa->nisn}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" value="{{$sw->username}}">

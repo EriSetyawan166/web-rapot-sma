@@ -5,6 +5,8 @@ use App\Http\Controllers\NilaiSiswaController;
 use App\Http\Controllers\RaporController;
 use App\Http\Controllers\RaporDetailController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\UpdatePasswordController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,4 +61,8 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardUserController@index')->name('dashboard');
+    Route::resource('password', UpdatePasswordController::class);
+    Route::get('rapor', 'App\Http\Controllers\LihatRaporController@index')->name('lihat-rapor');
 });
+
+

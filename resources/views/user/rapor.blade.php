@@ -69,7 +69,7 @@
             </li>
 
             <li class="nav-item {{ (request()->is('user/rapor')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('lihat-rapor')}}">
+                <a class="nav-link " href="{{route('matpel.index')}}">
                     <i class="fa-solid fa-file"></i>
                     <span>Lihat Rapor</span></a>
             </li>
@@ -136,7 +136,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Rapor</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -145,33 +145,54 @@
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Profile Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Rapor {{$siswa->nama}}</h6>
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="table-resposive mt-3">
-                                        <table id="datatableSimple" class="table table-bordered">
-                                            <tbody>
-                                                <th>NISN</th>
-                                                <th>{{$siswa->nisn}}</th>
-                                            </tbody>
-                                            <tbody>
-                                                <th>Nama</th>
-                                                <th>{{$siswa->nama}}</th>
-                                            </tbody>
-                                            <tbody>
-                                                <th>Alamat</th>
-                                                <th>{{$siswa->alamat}}</th>
-                                            </tbody>
+                                    <div class="table-responsive mt-3">
+                                        <table id="datatablesSimple" class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Mata Pelajaran</th>
+                                                    <th>KKM</th>
+                                                    <th>Nilai</th>
+                                                    <th>Predikat</th>
+                                                    <th>Deskripsi</th>
+                                                    <th>Keterangan</th>
+                                                </tr>
+                                            </thead>
+                                            @php
+                                                $i=1;
+                                            @endphp
+                                            @foreach ($data_nilai as $dn)
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{$i}}</td>
+                                                        <td>{{$dn->matpel->nama}}</td>
+                                                        <td>{{$dn->matpel->kkm}}</td>
+                                                        <td>{{$dn->nilai}}</td>
+                                                        <td>{{$dn->predikat}}</td>
+                                                        <td>{{$dn->ket}}</td>
+                                                        <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                            Terpenuhi
+                                                            @else
+                                                            Tidak Terpenuhi
+                                                            @endif</td>
+                                                    </tr>
+                                                </tbody>
+                                                @php
+                                                    $i++;
+                                                @endphp
+                                            @endforeach
+
                                         </table>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

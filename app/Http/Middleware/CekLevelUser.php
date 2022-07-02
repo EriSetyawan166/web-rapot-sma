@@ -21,7 +21,5 @@ class CekLevelUser
             return redirect()->intended('admin\dashboard');
         }
         return $next($request);
-
-
     }
 }

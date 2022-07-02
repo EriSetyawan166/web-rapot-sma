@@ -15,7 +15,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
+        $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
         $data_siswa = User::all();
 
 
@@ -42,12 +42,12 @@ class SiswaController extends Controller
     {
         $siswa = new Siswa();
         $user = new User();
-        $siswa->nis = $request->nis;
+        $siswa->nisn = $request->nisn;
         $siswa->nama = $request->nama;
         $siswa->alamat = $request->alamat;
         $user->username = $request->username;
         $user->password = bcrypt($request->password);
-        $user->nis_siswa = $request->nis;
+        $user->nisn_siswa = $request->nisn;
 
 
         $siswa->save();
@@ -89,6 +89,9 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $siswa = Siswa::findorfail($id);
+        $pass = bcrypt($request->password);
+        $user = User::where('nisn_siswa', '=', $id)->update(array('username' => $request->username, 'password' => $pass));
+
         $siswa->update($request->all());
         return back()->with('success', 'Data Berhasil Diubah!');
     }
@@ -102,7 +105,7 @@ class SiswaController extends Controller
     public function destroy($id)
     {
         // @dd($id);
-        $siswa = Siswa::where('nis','=',$id)->firstOrFail();
+        $siswa = Siswa::where('nisn','=',$id)->firstOrFail();
         $siswa->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }

@@ -15,8 +15,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
-        $total_siswa = Siswa::count();
+        $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
+        $total_siswa = Siswa::count()-1;
         $total_matpel = Matpel::count();
 
         return view('admin\dashboard', compact('siswa', 'total_siswa', 'total_matpel'));

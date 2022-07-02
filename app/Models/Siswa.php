@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     protected $table = "siswa";
-    protected $primaryKey = "nis";
+    protected $primaryKey = "nisn";
     public $incrementing = false;
-    protected $fillable = ['nis','nama','alamat'];
+    protected $fillable = ['nisn','nama','alamat'];
     use HasFactory;
 
     public function user()
@@ -20,6 +20,6 @@ class Siswa extends Model
 
     public function nilai()
     {
-        return $this->hasMany(Nilai::class,'nis_siswa', 'nis');
+        return $this->hasMany(Nilai::class,'nisn_siswa', 'nisn');
     }
 }

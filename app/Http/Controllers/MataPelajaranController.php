@@ -78,7 +78,7 @@ class MataPelajaranController extends Controller
     public function update(Request $request, $id)
     {
         $matpel = Matpel::findorfail($id);
-        $matpel->update($request->all());
+        
         return back()->with('success', 'Data Berhasil Diubah!');
     }
 

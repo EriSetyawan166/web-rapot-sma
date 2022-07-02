@@ -68,8 +68,8 @@
                     <span>Ubah Password</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('user/rapor')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('lihat-rapor')}}">
+            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('matpel.index')}}">
                     <i class="fa-solid fa-file"></i>
                     <span>Lihat Rapor</span></a>
             </li>
@@ -136,42 +136,35 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Ubah Password</h1>
                     </div>
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-xl-12">
+                        <div class="col-xl-4">
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Profile Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Password</h6>
                                 </div>
 
                                 <div class="card-body">
-                                    <div class="table-resposive mt-3">
-                                        <table id="datatableSimple" class="table table-bordered">
-                                            <tbody>
-                                                <th>NISN</th>
-                                                <th>{{$siswa->nisn}}</th>
-                                            </tbody>
-                                            <tbody>
-                                                <th>Nama</th>
-                                                <th>{{$siswa->nama}}</th>
-                                            </tbody>
-                                            <tbody>
-                                                <th>Alamat</th>
-                                                <th>{{$siswa->alamat}}</th>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <form action="{{url('user/password')}}/{{$user->id}}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="password" id="password" name="password" placeholder="Masukkan Password Lama" class="form-control" required autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="password_baru" name="password_baru" placeholder="Masukkan Password Baru" class="form-control" required autocomplete="off">
+                                        </div>
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <button class="btn btn-primary" type="submit">Simpan</button>
+                                    </form>
                                 </div>
+
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

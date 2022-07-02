@@ -42,7 +42,7 @@ class AuthController extends Controller
             if (Auth::attempt($ceklogin)){
 
                 $session = User::all()->where('username', $request->username)->first();
-                $siswa = Siswa::all()->where('nis', 1)->first();
+                $siswa = Siswa::all()->where('nisn', 1)->first();
                 // @dd($session->role_id);
 
                 $request->session()->regenerate();

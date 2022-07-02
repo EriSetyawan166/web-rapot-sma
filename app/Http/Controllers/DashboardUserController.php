@@ -15,9 +15,9 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
-        // @dd($siswa->nama);
-        return view('user\dashboard', compact('siswa'));
+        $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
+        // // @dd($siswa->nama);
+        return view('user\dashboard',compact('siswa'));
     }
 
     /**

@@ -21,9 +21,9 @@ class RaporDetailController extends Controller
     {
         $id = $request->id;
         // @dd($request);
-        $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
-        $data_siswa = Siswa::where('nis','=',$id)->firstOrFail();
-        $data_nilai = Nilai::all()->where('nis_siswa', '=' ,$id);
+        $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
+        $data_siswa = Siswa::where('nisn','=',$id)->firstOrFail();
+        $data_nilai = Nilai::all()->where('nisn_siswa', '=' ,$id);
         $data_matpel = Matpel::all();
 
         return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai'));
@@ -101,7 +101,7 @@ class RaporDetailController extends Controller
                 break;
         }
         $nilai->predikat = $hasil;
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
         // $nilai = Nilai::findOrFail($id);
         return back()->with('success', 'Data Berhasil Diubah!');
     }
@@ -116,7 +116,7 @@ class RaporDetailController extends Controller
     {
 
 
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->delete();
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

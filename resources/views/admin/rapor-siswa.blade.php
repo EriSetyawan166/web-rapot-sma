@@ -200,8 +200,8 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Nis</td>
-                                                <td>: {{$data_siswa->nis}}</td>
+                                                <td>NISN</td>
+                                                <td>: {{$data_siswa->nisn}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -255,7 +255,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$data_siswa->nis}}" method="POST">
+                                                        <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$data_siswa->nisn}}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
@@ -292,7 +292,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$dn->nis_siswa}}" method="GET">
+                                                            <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$dn->nisn_siswa}}" method="GET">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="_method">
                                                                 <button class="btn btn-danger" type="submit">hapus</button>
