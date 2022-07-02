@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nilai', function (Blueprint $table) {
-            $table->unsignedBigInteger('nisn_siswa');
+            $table->engine = 'InnoDB';
+            $table->string('nisn_siswa');
             $table->foreign('nisn_siswa')->references('nisn')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('kode_matpel');
             $table->foreign('kode_matpel')->references('kode')->on('matpel')->onDelete('cascade')->onUpdate('cascade');

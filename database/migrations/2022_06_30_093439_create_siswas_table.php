@@ -14,10 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->id('nisn');
+            $table->engine = 'InnoDB';
+            $table->String('nisn', 10)->index();
             $table->string('nama', 50);
             $table->string('alamat', 50)->nullable();
             $table->timestamps();
+            $table->primary('nisn');
         });
     }
 

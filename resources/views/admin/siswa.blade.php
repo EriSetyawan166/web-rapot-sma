@@ -198,7 +198,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Mata Pelajaran</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Siswa</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
@@ -207,7 +207,7 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off">
+                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" pattern="[0-9]+">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off">

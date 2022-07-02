@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('username');
             $table->string('password');
             $table->string('role_id')->default('0');
-            $table->unsignedBigInteger('nisn_siswa')->nullable();
+            $table->string('nisn_siswa')->nullable();
             $table->foreign('nisn_siswa')->references('nisn')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
