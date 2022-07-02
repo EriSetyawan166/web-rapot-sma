@@ -51,6 +51,10 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'as' => 'nilai-siswa.destroy',
         'uses' => 'App\Http\Controllers\NilaiSiswaController@destroy',
     ]);
+    Route::put('nilai-siswa/{matpelId}/{siswaId}', [
+        'as' => 'nilai-siswa.update',
+        'uses' => 'App\Http\Controllers\NilaiSiswaController@update',
+    ]);
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){

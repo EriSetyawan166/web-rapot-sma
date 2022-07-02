@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('kode_matpel')->references('kode')->on('matpel')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('nilai');
             $table->string('predikat', 1);
-            $table->string('ket');
+            $table->string('ket')->nullable();
             $table->timestamps();
             $table->primary(['nis_siswa','kode_matpel']);
         });

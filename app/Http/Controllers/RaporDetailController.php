@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class RaporDetailController extends Controller
 {
@@ -80,7 +81,27 @@ class RaporDetailController extends Controller
      */
     public function update(Request $request, $id_matpel, $id_siswa)
     {
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket));
+        $nilai = new Nilai();
+        $nilai->nilai = $request->nilai;
+        switch ($nilai->nilai) {
+            case $nilai->nilai >= 93 && $nilai->nilai <=100:
+                $hasil = "A";
+                break;
+
+            case $nilai->nilai >= 85 && $nilai->nilai <93:
+                $hasil = "B";
+                break;
+
+            case $nilai->nilai >= 77 && $nilai->nilai <85:
+                $hasil = "C";
+                break;
+
+            default:
+                $hasil = "D";
+                break;
+        }
+        $nilai->predikat = $hasil;
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
         // $nilai = Nilai::findOrFail($id);
         return back()->with('success', 'Data Berhasil Diubah!');
     }
