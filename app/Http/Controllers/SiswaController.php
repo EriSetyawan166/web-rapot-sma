@@ -16,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
-        $data_siswa = User::all();
+        $data_siswa = User::paginate(6);
 
 
         return view('admin.siswa',compact('siswa', 'data_siswa'));
@@ -40,8 +40,14 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+
         $siswa = new Siswa();
         $user = new User();
+        $data_siswa = Siswa::where('nisn', '=', $request->nisn)->first();
+        if ($data_siswa) {
+            return back()->with('info', 'Duplikat data (Data NISN sudah terdaftar di dalam sistem)');
+        }
+
         $siswa->nisn = $request->nisn;
         $siswa->nama = $request->nama;
         $siswa->alamat = $request->alamat;

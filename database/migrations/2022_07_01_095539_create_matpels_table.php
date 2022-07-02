@@ -14,11 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('matpel', function (Blueprint $table) {
-            $table->id('kode');
+            $table->engine = 'InnoDB';
+            $table->string('kode')->index();
             $table->string('nama',50);
             $table->integer('kkm');
             $table->string('kelompok');
             $table->timestamps();
+            $table->primary('kode');
         });
     }
 

@@ -197,13 +197,13 @@
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Matkul" class="form-control" required autocomplete="off">
+                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Matkul" class="form-control" required autocomplete="off" pattern="[0-9]+">
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan Nama Mata Pelajaran" class="form-control" required autocomplete="off">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan KKM" class="form-control" required autocomplete="off">
+                                                    <input type="number" id="kkm" name="kkm" placeholder="Masukkan KKM" class="form-control" required autocomplete="off" max="100" min="0">
                                                 </div>
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%" name="kelompok" id="kelompok" required>
@@ -237,12 +237,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i = 1;
-                                                @endphp
                                                 @foreach ($matpel as $mp)
                                                     <tr>
-                                                        <td>{{$i}}</td>
+                                                        <td>{{($matpel->currentPage() - 1) * $matpel->perPage() + $loop->iteration}}</td>
                                                         <td>{{$mp->kode}}</td>
                                                         <td>{{$mp->nama}}</td>
                                                         <td>{{$mp->kkm}}</td>
@@ -251,9 +248,6 @@
                                                             <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$mp->kode}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
                                                         </td>
                                                     </tr>
-                                                    @php
-                                                        $i++;
-                                                    @endphp
                                                 @endforeach
 
                                                 @foreach ($matpel as $mp)
@@ -294,13 +288,13 @@
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Mata Pelajaran" class="form-control" required autocomplete="off" value="{{$mp->kode}}">
+                                                                    <input type="text" id="kode" name="kode" placeholder="Masukkan nomor Kode Mata Pelajaran" class="form-control" pattern="[0-9]+" required autocomplete="off" value="{{$mp->kode}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan nama matpel" class="form-control" required autocomplete="off" value="{{$mp->nama}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" id="kkm" name="kkm" placeholder="Masukkan nilai KKM" class="form-control" required autocomplete="off" value="{{$mp->kkm}}">
+                                                                    <input type="number" id="kkm" name="kkm" placeholder="Masukkan nilai KKM" class="form-control" max="100" min="0" required autocomplete="off" value="{{$mp->kkm}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <select class="form-control select2" style="width: 100%" name="kelompok" id="kelompok" required>
@@ -328,7 +322,14 @@
                                             </tbody>
                                         </table>
                                     </div>
+
                                 </div>
+                                <div class="card-footer">
+
+                                    {{$matpel->links()}}
+
+                                </div>
+
                             </div>
                         </div>
                     </div>

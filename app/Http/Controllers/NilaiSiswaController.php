@@ -19,7 +19,7 @@ class NilaiSiswaController extends Controller
     public function index(Request $request)
     {
         $id = $request->kode;
-        $data_nilai = Nilai::all()->where('kode_matpel', '=', $id);
+        $data_nilai = Nilai::where('kode_matpel', '=', $id)->paginate(5);
         $data_matpel = Matpel::where('kode', '=', $id)->firstOrFail();
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
         return view('admin.nilai-siswa', compact('siswa', 'data_nilai', 'data_matpel'));

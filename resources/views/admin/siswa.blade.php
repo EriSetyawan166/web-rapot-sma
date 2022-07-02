@@ -213,7 +213,7 @@
                                                     <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off">
+                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+">
                                                 </div>
                                                 <div class="form-group">
                                                     {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
@@ -246,15 +246,13 @@
                                             </thead>
                                             <tbody>
 
-                                                @php
-                                                    $i = 1;
-                                                @endphp
+
                                                 @foreach ($data_siswa as $sw)
                                                 @if ($sw->username == 'admin' )
                                                             @continue
                                                         @endif
                                                     <tr>
-                                                        <td>{{$i}}</td>
+                                                        <td>{{(($data_siswa->currentPage() - 1) * $data_siswa->perPage() + $loop->iteration)-1}}</td>
                                                         <td>{{$sw->siswa->nisn}}</td>
                                                         <td>{{$sw->username}}</td>
                                                         <td>{{$sw->siswa->nama}}</td>
@@ -263,9 +261,6 @@
                                                             <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
                                                         </td>
                                                     </tr>
-                                                    @php
-                                                        $i++;
-                                                    @endphp
                                                 @endforeach
 
                                                 @foreach ($data_siswa as $sw)
@@ -307,10 +302,10 @@
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" value="{{$sw->siswa->nisn}}">
+                                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" pattern="[0-9]+" value="{{$sw->siswa->nisn}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" value="{{$sw->username}}">
+                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+" value="{{$sw->username}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" value="{{$sw->siswa->nama}}">
@@ -340,6 +335,9 @@
 
                                             </tbody>
                                         </table>
+                                    </div>
+                                    <div class="card-footer">
+                                        {{$data_siswa->links()}}
                                     </div>
                                 </div>
                             </div>

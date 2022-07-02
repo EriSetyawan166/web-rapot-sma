@@ -237,8 +237,8 @@
                                                         @else
                                                         Tidak Terpenuhi
                                                         @endif</td>
-                                                    <td><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
-                                                        <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a></td>
+                                                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ubah_siswa{{$dn->kode_matpel}}">Ubah</a>
+                                                        <a href="" class="btn btn-danger btn-sm mt-2" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}">Hapus</a></td>
                                                 </tr>
                                                 @php
                                                     $i++;
@@ -259,7 +259,7 @@
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off" value="{{$dn->nilai}}">
+                                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required max="100" min="0" autocomplete="off" value="{{$dn->nilai}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}

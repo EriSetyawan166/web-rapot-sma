@@ -234,7 +234,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off">
+                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off" max="100" min="0">
                                                 </div>
                                                 <div class="form-group">
                                                     {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}

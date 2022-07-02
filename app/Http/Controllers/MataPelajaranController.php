@@ -15,7 +15,7 @@ class MataPelajaranController extends Controller
      */
     public function index()
     {
-        $matpel = Matpel::all();
+        $matpel = Matpel::paginate(5);
         return view('admin.matpel', compact('matpel'));
     }
 
@@ -38,6 +38,10 @@ class MataPelajaranController extends Controller
     public function store(Request $request)
     {
         $matpel = new Matpel();
+        $data_matpel = Matpel::where('kode', '=', $request->kode)->first();
+        if ($data_matpel) {
+            return back()->with('info', 'Duplikat data (Data kode Mata sudah terdaftar di dalam sistem)');
+        }
         $matpel->kode = $request->kode;
         $matpel->nama = $request->nama;
         $matpel->kkm = $request->kkm;
@@ -78,7 +82,7 @@ class MataPelajaranController extends Controller
     public function update(Request $request, $id)
     {
         $matpel = Matpel::findorfail($id);
-        
+        $matpel->update($request->all());
         return back()->with('success', 'Data Berhasil Diubah!');
     }
 

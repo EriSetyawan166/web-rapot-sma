@@ -45,6 +45,11 @@ class RaporController extends Controller
     public function store(Request $request)
     {
         $nilai = new Nilai();
+
+        $data_nilai = Nilai::where([['nisn_siswa', $request->nisn], ['kode_matpel', $request->kode_matpel],])->first();
+        if ($data_nilai) {
+            return back()->with('info', 'Duplikat data (Data sudah terdaftar di dalam sistem)');
+        }
         $nilai->nisn_siswa = $request->nisn;
         $nilai->kode_matpel = $request->kode_matpel;
         $nilai->nilai = $request->nilai;

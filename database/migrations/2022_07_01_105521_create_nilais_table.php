@@ -17,7 +17,7 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             $table->string('nisn_siswa');
             $table->foreign('nisn_siswa')->references('nisn')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('kode_matpel');
+            $table->string('kode_matpel');
             $table->foreign('kode_matpel')->references('kode')->on('matpel')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('nilai');
             $table->string('predikat', 1);
