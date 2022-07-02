@@ -237,7 +237,8 @@
                                                         @else
                                                         Tidak Terpenuhi
                                                         @endif</td>
-                                                    <td><a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a></td>
+                                                    <td><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
+                                                        <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a></td>
                                                 </tr>
                                                 @php
                                                     $i++;
@@ -245,6 +246,38 @@
                                                 @endforeach
 
                                                 @foreach ($data_nilai as $dn)
+                                                <div class="modal fade" id="ubah_siswa{{$dn->kode_matpel}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Nilai</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$data_siswa->nis}}" method="POST">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off" value="{{$dn->nilai}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
+                                                                    <textarea class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan">{{$dn->ket}}</textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                                        <input type="hidden" name="_method" value="PUT">
+                                                                    <button class="btn btn-warning" type="submit">Ubah</button>
+                                                            </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+
+
+
                                                 <div class="modal fade" id="hapus_siswa{{$dn->kode_matpel}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">

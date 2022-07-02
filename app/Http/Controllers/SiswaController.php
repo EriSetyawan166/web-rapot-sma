@@ -17,7 +17,7 @@ class SiswaController extends Controller
     {
         $siswa = Siswa::where('nis','=',Auth::user()->nis_siswa)->firstOrFail();
         $data_siswa = User::all();
-        
+
 
         return view('admin.siswa',compact('siswa', 'data_siswa'));
     }

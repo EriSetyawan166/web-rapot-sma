@@ -78,9 +78,11 @@ class RaporDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_matpel, $id_siswa)
     {
-        //
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nis_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket));
+        // $nilai = Nilai::findOrFail($id);
+        return back()->with('success', 'Data Berhasil Diubah!');
     }
 
     /**

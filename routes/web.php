@@ -40,6 +40,12 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'as' => 'rapor-detail.destroy',
         'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
     ]);
+
+    Route::put('rapor-detail/{matpelId}/{siswaId}', [
+        'as' => 'rapor-detail.update',
+        'uses' => 'App\Http\Controllers\RaporDetailController@update',
+    ]);
+
     Route::resource('nilai-siswa', NilaiSiswaController::class);
     Route::get('nilai-siswa/{matpelId}/{siswaId}', [
         'as' => 'nilai-siswa.destroy',
