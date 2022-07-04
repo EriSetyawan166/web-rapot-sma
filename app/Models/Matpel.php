@@ -15,7 +15,7 @@ class Matpel extends Model
 
     public function nilai()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->hasMany(Nilai::class);
     }
 
 }

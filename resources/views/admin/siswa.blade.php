@@ -305,7 +305,7 @@
                                                                     <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" pattern="[0-9]+" value="{{$sw->siswa->nisn}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+" value="{{$sw->username}}">
+                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" value="{{$sw->username}}">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" value="{{$sw->siswa->nama}}">
