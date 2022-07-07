@@ -145,7 +145,31 @@
                             <div class="card shadow mb-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Rapor {{$siswa->nama}}</h6>
+                                    <table style="width: 100%">
+                                        <tbody>
+                                            <td style="width: 15%">Nama Sekolah</td>
+                                            <td style="width: 63%">: SMAN 87 Jakarta</td>
+                                            <td>Kelas</td>
+                                            <td>: XII MIPA 2</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Alamat</td>
+                                            <td>: JL. Mawar II</td>
+                                            <td>Semester</td>
+                                            <td>: 2 (Dua)</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Nama Peserta Didik</td>
+                                            <td>: {{$siswa->nama}}</td>
+                                            <td>Tahun Pelajaran</td>
+                                            <td>: 2019/2020</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Nomor Induk/NISN</td>
+                                            <td>: {{$siswa->nisn}}</td>
+
+                                        </tbody>
+                                    </table>
                                 </div>
 
                                 <div class="card-body">
@@ -162,31 +186,137 @@
                                                     <th>Keterangan</th>
                                                 </tr>
                                             </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok A ( Umum )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
                                             @php
                                                 $i=1;
                                             @endphp
                                             @foreach ($data_nilai as $dn)
-                                                <tbody>
-                                                    <tr>
-                                                        <td>{{$i}}</td>
-                                                        <td>{{$dn->matpel->nama}}</td>
-                                                        <td>{{$dn->matpel->kkm}}</td>
-                                                        <td>{{$dn->nilai}}</td>
-                                                        <td>{{$dn->predikat}}</td>
-                                                        <td>{{$dn->ket}}</td>
-                                                        <td>@if ($dn->nilai >= $dn->matpel->kkm)
-                                                            Terpenuhi
-                                                            @else
-                                                            Tidak Terpenuhi
-                                                            @endif</td>
-                                                    </tr>
-                                                </tbody>
-                                                @php
+                                            @if ($dn->matpel->kelompok == 'Kelompok A ( Umum )')
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                </tr>
+                                            </tbody>
+                                            @php
                                                     $i++;
                                                 @endphp
+                                            @endif
+                                            @endforeach
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok B ( Umum )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            @foreach ($data_nilai as $dn)
+                                            @if ($dn->matpel->kelompok == 'Kelompok B ( Umum )')
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                </tr>
+                                            </tbody>
+                                            @php
+                                                    $i++;
+                                                @endphp
+                                            @endif
+
+
+                                            @endforeach
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok C ( Peminatan )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            @foreach ($data_nilai as $dn)
+                                            @if ($dn->matpel->kelompok == 'Kelompok C ( Peminatan )')
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                </tr>
+                                            </tbody>
+                                            @php
+                                                    $i++;
+                                                @endphp
+                                            @endif
+
+
                                             @endforeach
 
+
                                         </table>
+
+                                    </div>
+
+                                </div>
+                                <div class="card-footer d-flex justify-content-center" style="width: 100%;" >
+                                    <div class="justify-content-left" style="width: 92%;">
+                                        <p>Tabel interval predikat berdasarkan KKM</p>
+                                        <table id="datatablesSimple" class="table table-bordered text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2" class="align-middle">KKM</th>
+                                                    <th colspan="5">Predikat</th>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <th>D</th>
+                                                    <th>C</th>
+                                                    <th>B</th>
+                                                    <th>5</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>77</th>
+                                                    <th>Nilai < 77</th>
+                                                    <th>Nilai <= Nilai < 86</th>
+                                                    <th>85 <= Nilai < 93</th>
+                                                    <th>Nilai >= 93</th>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
 

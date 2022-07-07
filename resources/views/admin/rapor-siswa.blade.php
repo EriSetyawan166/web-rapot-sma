@@ -191,23 +191,34 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <td>Nama</td>
-                                                <td>: {{$data_siswa->nama}}</td>
-                                            </tr>
-                                        </thead>
+                                    <table style="width: 100%">
                                         <tbody>
-                                            <tr>
-                                                <td>NISN</td>
-                                                <td>: {{$data_siswa->nisn}}</td>
-                                            </tr>
+                                            <td style="width: 15%">Nama Sekolah</td>
+                                            <td style="width: 63%">: SMAN 87 Jakarta</td>
+                                            <td>Kelas</td>
+                                            <td>: XII MIPA 2</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Alamat</td>
+                                            <td>: JL. Mawar II</td>
+                                            <td>Semester</td>
+                                            <td>: 2 (Dua)</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Nama Peserta Didik</td>
+                                            <td>: {{$data_siswa->nama}}</td>
+                                            <td>Tahun Pelajaran</td>
+                                            <td>: 2019/2020</td>
+                                        </tbody>
+                                        <tbody>
+                                            <td>Nomor Induk/NISN</td>
+                                            <td>: {{$data_siswa->nisn}}</td>
+
                                         </tbody>
                                     </table>
 
                                     <div class="table-responsive mt-3">
-                                        <table id="datatableSimple" class="table table-bordered">
+                                        <table id="datatablesSimple" class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -217,14 +228,21 @@
                                                     <th>Predikat</th>
                                                     <th>Deskripsi</th>
                                                     <th>Keterangan</th>
-                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $i=1;
-                                                @endphp
-                                                @foreach ($data_nilai as $dn )
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok A ( Umum )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            @php
+                                                $i=1;
+                                            @endphp
+                                            @foreach ($data_nilai as $dn)
+                                            @if ($dn->matpel->kelompok == 'Kelompok A ( Umum )')
+                                            <tbody>
                                                 <tr>
                                                     <td>{{$i}}</td>
                                                     <td>{{$dn->matpel->nama}}</td>
@@ -237,74 +255,110 @@
                                                         @else
                                                         Tidak Terpenuhi
                                                         @endif</td>
-                                                    <td><a href="" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ubah_siswa{{$dn->kode_matpel}}">Ubah</a>
-                                                        <a href="" class="btn btn-danger btn-sm mt-2" data-toggle="modal" data-target="#hapus_siswa{{$dn->kode_matpel}}">Hapus</a></td>
                                                 </tr>
-                                                @php
+                                            </tbody>
+                                            @php
                                                     $i++;
                                                 @endphp
-                                                @endforeach
-
-                                                @foreach ($data_nilai as $dn)
-                                                <div class="modal fade" id="ubah_siswa{{$dn->kode_matpel}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Nilai</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$data_siswa->nisn}}" method="POST">
-                                                            @csrf
-                                                            <div class="modal-body">
-                                                                <div class="form-group">
-                                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required max="100" min="0" autocomplete="off" value="{{$dn->nilai}}">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
-                                                                    <textarea class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan">{{$dn->ket}}</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                                        <input type="hidden" name="_method" value="PUT">
-                                                                    <button class="btn btn-warning" type="submit">Ubah</button>
-                                                            </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    </div>
+                                            @endif
+                                            @endforeach
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok B ( Umum )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            @foreach ($data_nilai as $dn)
+                                            @if ($dn->matpel->kelompok == 'Kelompok B ( Umum )')
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                </tr>
+                                            </tbody>
+                                            @php
+                                                    $i++;
+                                                @endphp
+                                            @endif
 
 
+                                            @endforeach
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="7">
+                                                        Kelompok C ( Peminatan )
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            @foreach ($data_nilai as $dn)
+                                            @if ($dn->matpel->kelompok == 'Kelompok C ( Peminatan )')
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{$i}}</td>
+                                                    <td>{{$dn->matpel->nama}}</td>
+                                                    <td>{{$dn->matpel->kkm}}</td>
+                                                    <td>{{$dn->nilai}}</td>
+                                                    <td>{{$dn->predikat}}</td>
+                                                    <td>{{$dn->ket}}</td>
+                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
+                                                        Terpenuhi
+                                                        @else
+                                                        Tidak Terpenuhi
+                                                        @endif</td>
+                                                </tr>
+                                            </tbody>
+                                            @php
+                                                    $i++;
+                                                @endphp
+                                            @endif
 
-                                                <div class="modal fade" id="hapus_siswa{{$dn->kode_matpel}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/rapor-detail')}}/{{$dn->kode_matpel}}/{{$dn->nisn_siswa}}" method="GET">
-                                                                {{ csrf_field() }}
-                                                                <input type="hidden" name="_method">
-                                                                <button class="btn btn-danger" type="submit">hapus</button>
-                                                            </form>
 
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endforeach
+                                            @endforeach
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="card-footer d-flex justify-content-center" style="width: 100%;" >
+                                    <div class="justify-content-left" style="width: 92%;">
+                                        <p>Tabel interval predikat berdasarkan KKM</p>
+                                        <table id="datatablesSimple" class="table table-bordered text-center">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="2" class="align-middle">KKM</th>
+                                                    <th colspan="5">Predikat</th>
+
+                                                </tr>
+                                                <tr>
+
+                                                    <th>D</th>
+                                                    <th>C</th>
+                                                    <th>B</th>
+                                                    <th>5</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th>77</th>
+                                                    <th>Nilai < 77</th>
+                                                    <th>Nilai <= Nilai < 86</th>
+                                                    <th>85 <= Nilai < 93</th>
+                                                    <th>Nilai >= 93</th>
+
+                                                </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
