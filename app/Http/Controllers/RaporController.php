@@ -8,6 +8,9 @@ use App\Models\Nilai;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+
+use function GuzzleHttp\Promise\all;
 
 class RaporController extends Controller
 {
@@ -44,13 +47,14 @@ class RaporController extends Controller
      */
     public function store(Request $request)
     {
+        // @dd($request->all());
         $nilai = new Nilai();
 
         $data_nilai = Nilai::where([['nisn_siswa', $request->nisn], ['kode_matpel', $request->kode_matpel],])->first();
         if ($data_nilai) {
             return back()->with('info', 'Duplikat data (Data sudah terdaftar di dalam sistem)');
         }
-        $nilai->nisn_siswa = $request->nisn;
+        $nilai->nisn_siswa = $request->nisn_siswa;
         $nilai->kode_matpel = $request->kode_matpel;
         $nilai->nilai = $request->nilai;
         $nilai->ket = $request->ket;
@@ -75,6 +79,7 @@ class RaporController extends Controller
         $nilai->predikat = $hasil;
         $nilai->save();
         return back()->with('success', 'Data Berhasil ditambah');
+        // return Redirect::to(url()->previous());
 
     }
 
@@ -122,5 +127,22 @@ class RaporController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function input(Request $request)
+    {
+        // request()->fullUrlWithQuery(['nisn' => null]);
+        // @dd($request->all());
+        $data_siswa = Siswa::where('nisn', $request->nisn)->first();
+        $data_matpel = Matpel::all();
+        $data_nilai = Nilai::where('nisn_siswa', $request->nisn)->get();
+        // @dd($data_matpel);
+        
+        return view('admin.input-nilai',compact('data_siswa','data_matpel','data_nilai'));
+    }
+
+    public function hapus(Request $request)
+    {
+        @dd($request->all());
     }
 }

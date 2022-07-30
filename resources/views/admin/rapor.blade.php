@@ -197,22 +197,22 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Input Rapor</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
                                 </div>
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Nilai</button>
+                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Nilai</button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rapor</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Data Nilai Siswa</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{route('rapor.store')}}" method="POST">
-                                            @csrf
+                                        <form action="{{route('input-nilai')}}" method="GET">
+                                            
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <select class="form-control select2" style="width: 100%" name="nisn" id="nisn" required>
@@ -225,32 +225,33 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="kode_matpel" id="kode_matpel" required>
-                                                        <option selected disabled value="">Pilih Mata Pelajaran</option>
-                                                        @foreach ($data_matpel as $item)
-                                                        <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="number" id="nilai" name="nilai" placeholder="Masukkan Nilai" class="form-control" required autocomplete="off" max="100" min="0">
-                                                </div>
-                                                <div class="form-group">
-                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
-                                                    <textarea class="form-control" id="ket" name="ket" placeholder="Masukkan Keterangan"></textarea>
-                                                </div>
 
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                                <button type="submit" class="btn btn-primary">Tampilkan</button>
                                             </div>
                                             </div>
                                         </form>
 
                                     </div>
-                                    </div>
+                                    </div> --}}
+                                    <form action="{{route('input-nilai')}}">
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="nisn" id="nisn">
+                                                <option selected disabled value="">Pilih Siswa</option>
+                                                @foreach ($data_siswa as $item)
+                                                @if ($item->nama == 'admin' )
+                                                    @continue
+                                                @endif
+                                                <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <button class="btn btn-primary" >
+                                            Tampilkan
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -262,7 +263,7 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Rapot Siswa</h6>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{route('rapor-detail.index')}}">

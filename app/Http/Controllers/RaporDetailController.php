@@ -115,7 +115,7 @@ class RaporDetailController extends Controller
     public function destroy($id_matpel, $id_siswa)
     {
 
-
+        // @dd('test');
         $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }

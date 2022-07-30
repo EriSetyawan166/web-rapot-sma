@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
     Route::resource('rapor-detail', RaporDetailController::class);
-    Route::get('rapor-detail/{matpelId}/{siswaId}', [
+    Route::delete('rapor-detail/{matpelId}/{siswaId}', [
         'as' => 'rapor-detail.destroy',
         'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
     ]);
@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'as' => 'nilai-siswa.update',
         'uses' => 'App\Http\Controllers\NilaiSiswaController@update',
     ]);
+    Route::get('input-nilai', 'App\Http\Controllers\RaporController@input' )->name('input-nilai');
+   
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){
