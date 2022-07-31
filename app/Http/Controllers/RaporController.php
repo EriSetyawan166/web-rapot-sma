@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Matpel;
 use App\Models\Nilai;
 use App\Models\Siswa;
+use App\Models\TahunAjaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,9 +24,9 @@ class RaporController extends Controller
     {
         $data_matpel = Matpel::all();
         $data_nilai = Nilai::all();
-
+        $data_tahun = TahunAjaran::all();
         $data_siswa = Siswa::all();
-        return view('admin.rapor', compact('data_nilai', 'data_matpel', 'data_siswa'));
+        return view('admin.rapor', compact('data_nilai', 'data_matpel', 'data_siswa','data_tahun'));
     }
 
 
@@ -50,14 +51,17 @@ class RaporController extends Controller
         // @dd($request->all());
         $nilai = new Nilai();
 
-        $data_nilai = Nilai::where([['nisn_siswa', $request->nisn], ['kode_matpel', $request->kode_matpel],])->first();
-        if ($data_nilai) {
-            return back()->with('info', 'Duplikat data (Data sudah terdaftar di dalam sistem)');
-        }
+        // $data_nilai = Nilai::where([['nisn_siswa', $request->nisn], ['kode_matpel', $request->kode_matpel],])->first();
+        // if ($data_nilai) {
+        //     return back()->with('info', 'Duplikat data (Data sudah terdaftar di dalam sistem)');
+        // }
         $nilai->nisn_siswa = $request->nisn_siswa;
         $nilai->kode_matpel = $request->kode_matpel;
         $nilai->nilai = $request->nilai;
         $nilai->ket = $request->ket;
+        $nilai->tahun_ajaran_id = $request->tahun;
+        $nilai->semester = $request->sem;
+        
 
         switch ($nilai->nilai) {
             case $nilai->nilai >= 93 && $nilai->nilai <=100:
@@ -132,13 +136,17 @@ class RaporController extends Controller
     public function input(Request $request)
     {
         // request()->fullUrlWithQuery(['nisn' => null]);
-        // @dd($request->all());
+        // @dd($request->all());    
         $data_siswa = Siswa::where('nisn', $request->nisn)->first();
         $data_matpel = Matpel::all();
-        $data_nilai = Nilai::where('nisn_siswa', $request->nisn)->get();
+        $data_tahun = TahunAjaran::where('id',$request->tahun)->first();
+        // @dd($data_tahun);
+        $data_sem = $request->sem;
+        $data_nilai = Nilai::where('nisn_siswa', $request->nisn)->where('tahun_ajaran_id',$request->tahun)->where('semester', $request->sem)->get();
+        // @dd($data_nilai);
         // @dd($data_matpel);
         
-        return view('admin.input-nilai',compact('data_siswa','data_matpel','data_nilai'));
+        return view('admin.input-nilai',compact('data_siswa','data_matpel','data_nilai', 'data_tahun', 'data_sem'));
     }
 
     public function hapus(Request $request)

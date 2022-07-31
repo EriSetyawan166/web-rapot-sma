@@ -202,13 +202,13 @@
                                             <td>Alamat</td>
                                             <td>: JL. Mawar II</td>
                                             <td>Semester</td>
-                                            <td>: 2 (Dua)</td>
+                                            <td>: {{$data_sem}}</td>
                                         </tbody>
                                         <tbody>
                                             <td>Nama Peserta Didik</td>
                                             <td>: {{$data_siswa->nama}}</td>
                                             <td>Tahun Pelajaran</td>
-                                            <td>: 2019/2020</td>
+                                            <td>: {{$data_tahun->tahun}}</td>
                                         </tbody>
                                         <tbody>
                                             <td>Nomor Induk/NISN</td>

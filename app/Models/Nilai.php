@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Nilai extends Model
 {
     protected $table = "nilai";
-    protected $primaryKey = ["nisn_siswa", "kode_matkul"];
-    protected $fillable = ['nisn_siswa','kode_matkul','nilai', 'predikat', 'ket'];
+    protected $primaryKey = ["id"];
+    protected $fillable = ['id','nisn_siswa','kode_matkul','nilai', 'predikat', 'ket','tahun_ajaran_id','semester'];
     public $incrementing = false;
     use HasFactory;
 
@@ -21,5 +21,10 @@ class Nilai extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'nisn_siswa','nisn');
+    }
+
+    public function tahun()
+    {
+        return $this->belongsTo(TahunAjaran::class, 'tahun_ajaran_id','id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Matpel;
 use App\Models\Nilai;
+use App\Models\TahunAjaran;
 use Illuminate\Support\Facades\DB;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
@@ -19,14 +20,17 @@ class RaporDetailController extends Controller
      */
     public function index(Request $request)
     {
+        $data_tahun = TahunAjaran::where('id',$request->tahun)->first();
+        $data_sem = $request->sem;
+        // @dd($request->all())
         $id = $request->id;
         // @dd($request);
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
         $data_siswa = Siswa::where('nisn','=',$id)->firstOrFail();
-        $data_nilai = Nilai::all()->where('nisn_siswa', '=' ,$id);
+        $data_nilai = Nilai::all()->where('nisn_siswa', '=' ,$id)->where('tahun_ajaran_id',$request->tahun)->where('semester', $request->sem);
         $data_matpel = Matpel::all();
 
-        return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai'));
+        return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai','data_tahun','data_sem'));
     }
 
     /**
@@ -79,7 +83,7 @@ class RaporDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_matpel, $id_siswa)
+    public function update(Request $request, $id_matpel, $id_siswa, $id_tahun, $id_sem)
     {
         $nilai = new Nilai();
         $nilai->nilai = $request->nilai;
@@ -101,7 +105,7 @@ class RaporDetailController extends Controller
                 break;
         }
         $nilai->predikat = $hasil;
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->where('tahun_ajaran_id',$id_tahun)->where('semester', $id_sem)->update(array('nilai' => $request->nilai, 'ket' => $request->ket, 'predikat' => $nilai->predikat));
         // $nilai = Nilai::findOrFail($id);
         return back()->with('success', 'Data Berhasil Diubah!');
     }
@@ -112,11 +116,13 @@ class RaporDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_matpel, $id_siswa)
+    public function destroy($id_matpel, $id_siswa,$id_tahun,$id_sem)
     {
 
         // @dd('test');
-        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->delete();
+        // $test = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->where('tahun_ajaran_id',$id_tahun)->where('semester', $id_sem)->first();
+        // @dd($test);
+        $nilai = Nilai::where('kode_matpel','=',$id_matpel)->where('nisn_siswa', '=', $id_siswa)->where('tahun_ajaran_id',$id_tahun)->where('semester', $id_sem)->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

@@ -185,7 +185,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Data Nilai {{$data_siswa->nama}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Data Nilai</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -194,11 +194,23 @@
 
                         <div class="col-xl-12">
                             <div class="card shadow mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai</h6>
-                                </div>
+                               
+                                
                                 <div class="card-body">
+                                    <table width="100%">
+                                        <tr>
+                                            <th  width = "12%">Nama</th>
+                                            <th>: {{$data_siswa->nama}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Tahun Ajaran</th>
+                                            <th>: {{$data_tahun->tahun}}</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Semester</th>
+                                            <th>: {{$data_sem}}</th>
+                                        </tr>
+                                    </table>
                                     <div class="table-responsive mt-3">
                                         <table id="datatablesSimple" class="table table-bordered">
                                             <thead>
@@ -263,6 +275,8 @@
                                                         <div class="modal-body">
                                                             <input type="hidden" id="nisn_siswa" name="nisn_siswa" value="{{$data_siswa->nisn}}">
                                                             <input type="hidden" id="kode_matpel" name="kode_matpel" value="{{$dm->kode}}">
+                                                            <input type="hidden" id="tahun" name="tahun" value="{{$data_tahun->id}}">
+                                                            <input type="hidden" id="sem" name="sem" value="{{$data_sem}}">
                                                             <div class="form-group">
                                                                 <input type="text" id="nama" name="nama"  class="form-control"  value="{{$dm->nama}}" disabled>
                                                             </div>
@@ -293,7 +307,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{url('admin/rapor-detail')}}/{{$dm->kode}}/{{$data_siswa->nisn}}" method="POST">
+                                                        <form action="{{url('admin/rapor-detail')}}/{{$dm->kode}}/{{$data_siswa->nisn}}/{{$data_tahun->id}}/{{$data_sem}}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <input type="hidden" id="nisn_siswa" name="nisn_siswa" value="{{$data_siswa->nisn}}">
@@ -337,7 +351,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/rapor-detail')}}/{{$dm->kode}}/{{$data_siswa->nisn}}" method="POST">
+                                                            <form action="{{url('admin/rapor-detail')}}/{{$dm->kode}}/{{$data_siswa->nisn}}/{{$data_tahun->id}}/{{$data_sem}}" method="POST">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <button class="btn btn-danger" type="submit">hapus</button>

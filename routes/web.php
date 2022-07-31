@@ -38,12 +38,12 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
     Route::resource('rapor-detail', RaporDetailController::class);
-    Route::delete('rapor-detail/{matpelId}/{siswaId}', [
+    Route::delete('rapor-detail/{matpelId}/{siswaId}/{tahunId}/{semId}', [
         'as' => 'rapor-detail.destroy',
         'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
     ]);
 
-    Route::put('rapor-detail/{matpelId}/{siswaId}', [
+    Route::put('rapor-detail/{matpelId}/{siswaId}/{tahunId}/{semId}', [
         'as' => 'rapor-detail.update',
         'uses' => 'App\Http\Controllers\RaporDetailController@update',
     ]);
