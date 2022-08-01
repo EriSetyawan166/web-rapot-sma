@@ -240,27 +240,44 @@
                                             @php
                                                 $i=1;
                                             @endphp
-                                            @foreach ($data_nilai as $dn)
-                                            @if ($dn->matpel->kelompok == 'Kelompok A ( Umum )')
+                                            @foreach ($kelompok_A as $kl)
+                                            @php
+                                                    $nilai = "kosong";
+                                                    $ket = "kosong";
+                                                    $predikat = "kosong";
+                                                    $deskripsi = "kosong";
+                                            @endphp
                                             <tbody>
                                                 <tr>
                                                     <td>{{$i}}</td>
-                                                    <td>{{$dn->matpel->nama}}</td>
-                                                    <td>{{$dn->matpel->kkm}}</td>
-                                                    <td>{{$dn->nilai}}</td>
-                                                    <td>{{$dn->predikat}}</td>
-                                                    <td>{{$dn->ket}}</td>
-                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
-                                                        Terpenuhi
-                                                        @else
-                                                        Tidak Terpenuhi
-                                                        @endif</td>
+                                                    <td>{{$kl->nama}}</td>
+                                                    @foreach ($data_nilai as $dn)
+                                                    @if ($dn->matpel->nama == $kl->nama)
+                                                        @php
+                                                            $nilai = $dn->nilai;
+                                                            $ket = $dn->ket;
+                                                            $predikat = $dn->predikat;
+                                                            if ($dn->nilai >= $dn->matpel->kkm) {
+                                                                $deskripsi = "Terpenuhi";
+                                                            }
+                                                            else {
+                                                                $deskripsi = "Tidak Terpenuhi";
+                                                            }
+                                                        @endphp
+                                                        {{-- <td>{{$dn->nil   --}}
+                                                    @endif
+                                                    @endforeach
+                                                    <td>{{$kl->kkm}}</td>
+                                                    <td>{{$nilai}}</td>
+                                                    <td>{{$predikat}}</td>
+                                                    <td>{{$ket}}</td>
+                                                    <td>{{$deskripsi}}</td>
+                                                    
                                                 </tr>
                                             </tbody>
                                             @php
                                                     $i++;
                                                 @endphp
-                                            @endif
                                             @endforeach
                                             <tbody>
                                                 <tr>
@@ -269,29 +286,44 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            @foreach ($data_nilai as $dn)
-                                            @if ($dn->matpel->kelompok == 'Kelompok B ( Umum )')
+                                            @foreach ($kelompok_B as $kl)
+                                            @php
+                                                    $nilai = "kosong";
+                                                    $ket = "kosong";
+                                                    $predikat = "kosong";
+                                                    $deskripsi = "kosong";
+                                            @endphp
                                             <tbody>
                                                 <tr>
                                                     <td>{{$i}}</td>
-                                                    <td>{{$dn->matpel->nama}}</td>
-                                                    <td>{{$dn->matpel->kkm}}</td>
-                                                    <td>{{$dn->nilai}}</td>
-                                                    <td>{{$dn->predikat}}</td>
-                                                    <td>{{$dn->ket}}</td>
-                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
-                                                        Terpenuhi
-                                                        @else
-                                                        Tidak Terpenuhi
-                                                        @endif</td>
+                                                    <td>{{$kl->nama}}</td>
+                                                    @foreach ($data_nilai as $dn)
+                                                    @if ($dn->matpel->nama == $kl->nama)
+                                                        @php
+                                                            $nilai = $dn->nilai;
+                                                            $ket = $dn->ket;
+                                                            $predikat = $dn->predikat;
+                                                            if ($dn->nilai >= $dn->matpel->kkm) {
+                                                                $deskripsi = "Terpenuhi";
+                                                            }
+                                                            else {
+                                                                $deskripsi = "Tidak Terpenuhi";
+                                                            }
+                                                        @endphp
+                                                        {{-- <td>{{$dn->nil   --}}
+                                                    @endif
+                                                    @endforeach
+                                                    <td>{{$kl->kkm}}</td>
+                                                    <td>{{$nilai}}</td>
+                                                    <td>{{$predikat}}</td>
+                                                    <td>{{$ket}}</td>
+                                                    <td>{{$deskripsi}}</td>
+                                                    
                                                 </tr>
                                             </tbody>
                                             @php
                                                     $i++;
                                                 @endphp
-                                            @endif
-
-
                                             @endforeach
                                             <tbody>
                                                 <tr>
@@ -300,30 +332,46 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                            @foreach ($data_nilai as $dn)
-                                            @if ($dn->matpel->kelompok == 'Kelompok C ( Peminatan )')
+                                            @foreach ($kelompok_C as $kl)
+                                            @php
+                                                    $nilai = "kosong";
+                                                    $ket = "kosong";
+                                                    $predikat = "kosong";
+                                                    $deskripsi = "kosong";
+                                            @endphp
                                             <tbody>
                                                 <tr>
                                                     <td>{{$i}}</td>
-                                                    <td>{{$dn->matpel->nama}}</td>
-                                                    <td>{{$dn->matpel->kkm}}</td>
-                                                    <td>{{$dn->nilai}}</td>
-                                                    <td>{{$dn->predikat}}</td>
-                                                    <td>{{$dn->ket}}</td>
-                                                    <td>@if ($dn->nilai >= $dn->matpel->kkm)
-                                                        Terpenuhi
-                                                        @else
-                                                        Tidak Terpenuhi
-                                                        @endif</td>
+                                                    <td>{{$kl->nama}}</td>
+                                                    @foreach ($data_nilai as $dn)
+                                                    @if ($dn->matpel->nama == $kl->nama)
+                                                        @php
+                                                            $nilai = $dn->nilai;
+                                                            $ket = $dn->ket;
+                                                            $predikat = $dn->predikat;
+                                                            if ($dn->nilai >= $dn->matpel->kkm) {
+                                                                $deskripsi = "Terpenuhi";
+                                                            }
+                                                            else {
+                                                                $deskripsi = "Tidak Terpenuhi";
+                                                            }
+                                                        @endphp
+                                                        {{-- <td>{{$dn->nil   --}}
+                                                    @endif
+                                                    @endforeach
+                                                    <td>{{$kl->kkm}}</td>
+                                                    <td>{{$nilai}}</td>
+                                                    <td>{{$predikat}}</td>
+                                                    <td>{{$ket}}</td>
+                                                    <td>{{$deskripsi}}</td>
+                                                    
                                                 </tr>
                                             </tbody>
                                             @php
                                                     $i++;
                                                 @endphp
-                                            @endif
-
-
                                             @endforeach
+                                            <tbody>
 
 
                                         </table>

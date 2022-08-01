@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin - Dashboard</title>
+    <title>Dashboard User</title>
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,14 +17,13 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+
 
 </head>
 
 <body id="page-top">
-
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -55,42 +54,27 @@
             </div>
 
 
-
-            <li class="nav-item {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('user/dashboard')) ? 'active' : '' }}">
 
                 <a class="nav-link" href="{{route('dashboard')}}">
-                    <i class="fas fa-fw fa-house"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
-
-                <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Siswa</span></a>
+                    <span>Profile Siswa</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('matpel.index')}}">
-                    <i class="fas fa-fw fa-book"></i>
-                    <span>Mata Pelajaran</span></a>
-            </li>
-            <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
-                    <i class="fas fa-fw fa-calendar"></i>
-                    <span>Tahun Ajaran</span></a>
+            <li class="nav-item {{ (request()->is('user/password')) ? 'active' : '' }}">
+
+                <a class="nav-link " href="{{route('password.index')}}">
+                    <i class="fa-solid fa-wrench"></i>
+                    <span>Ubah Password</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('rapor')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('rapor.index')}}">
-                    <i class="fas fa-fw fa-user-graduate"></i>
-                    <span>Rapor</span></a>
+            <li class="nav-item {{ (request()->is('user/rapor')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('rapor')}}">
+                    <i class="fa-solid fa-file"></i>
+                    <span>Lihat Rapor</span></a>
             </li>
+            <!-- Heading -->
 
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -108,7 +92,6 @@
             <!-- Main Content -->
             <div id="content">
 
-
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -118,33 +101,9 @@
                     </button>
 
 
-
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
 
 
 
@@ -155,24 +114,11 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="{{asset('img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                {{-- <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div> --}}
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -190,53 +136,40 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Selamat Datang, {{$siswa->nama}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Rapor</h1>
                     </div>
+
                     <!-- Content Row -->
                     <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="col-xl-6">
+                            <div class="card shadow mb-4">
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Siswa</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_siswa}}</div>
+                                <form action="{{route('lihat-rapor')}}">
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="tahun" id="tahun" required>
+                                                <option selected disabled value="">Pilih Tahun Ajaran</option>
+                                                @foreach ($data_tahun as $item)
+                                                <option value="{{ $item->id}}">{{$item->tahun}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas-solid fas fa-user fa-2x"></i>
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="sem" id="sem" required>
+                                                <option selected disabled value="">Pilih Semester</option>
+                                               
+                                                <option value="1">1 - Ganjil</option>
+                                                <option value="2">2 - Genap</option>
+                                                
+                                            </select>
                                         </div>
-                                    </div>
+                                        <button class="btn btn-primary" >
+                                            Tampilkan
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Mata Pelajaran</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_matpel}}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fas fa-book fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
                     </div>
-
-                    <!-- Content Row -->
-
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -300,7 +233,6 @@
     <!-- Page level custom scripts -->
     <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
-
     @include('sweetalert::alert')
 </body>
 

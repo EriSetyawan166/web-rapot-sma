@@ -24,13 +24,17 @@ class RaporDetailController extends Controller
         $data_sem = $request->sem;
         // @dd($request->all())
         $id = $request->id;
+        $kelompok_A = Matpel::where('kelompok','Kelompok A ( Umum )')->get();
+        $kelompok_B = Matpel::where('kelompok','Kelompok B ( Umum )')->get();
+        $kelompok_C = Matpel::where('Kelompok', 'Kelompok C ( Peminatan )')->get();
+        // @dd($kelompok_C);
         // @dd($request);
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
         $data_siswa = Siswa::where('nisn','=',$id)->firstOrFail();
         $data_nilai = Nilai::all()->where('nisn_siswa', '=' ,$id)->where('tahun_ajaran_id',$request->tahun)->where('semester', $request->sem);
         $data_matpel = Matpel::all();
 
-        return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai','data_tahun','data_sem'));
+        return view('admin.rapor-siswa', compact('siswa', 'data_siswa', 'data_matpel', 'data_nilai','data_tahun','data_sem','kelompok_A','kelompok_B','kelompok_C'));
     }
 
     /**

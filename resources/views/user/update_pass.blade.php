@@ -68,8 +68,8 @@
                     <span>Ubah Password</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('matpel.index')}}">
+            <li class="nav-item {{ (request()->is('user/rapor')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('rapor')}}">
                     <i class="fa-solid fa-file"></i>
                     <span>Lihat Rapor</span></a>
             </li>

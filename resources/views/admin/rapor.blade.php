@@ -76,6 +76,12 @@
                     <span>Mata Pelajaran</span></a>
             </li>
 
+            <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>Tahun Ajaran</span></a>
+            </li>
+
             <li class="nav-item {{ (request()->is('admin/rapor')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('rapor.index')}}">
                     <i class="fas fa-fw fa-user-graduate"></i>
@@ -340,12 +346,31 @@
                                                 <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
                                                 @endforeach
                                             </select>
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="tahun" id="tahun" required>
+                                                <option selected disabled value="">Pilih Tahun Ajaran</option>
+                                                @foreach ($data_tahun as $item)
+                                                <option value="{{ $item->id}}">{{$item->tahun}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control select2 mx-auto" style="width: 100%" name="sem" id="sem" required>
+                                                <option selected disabled value="">Pilih Semester</option>
+                                               
+                                                <option value="1">1 - Ganjil</option>
+                                                <option value="2">2 - Genap</option>
+                                                
+                                            </select>
                                         </div>
                                         <button class="btn btn-primary">
                                             Tampilkan
                                         </button>
                                     </form>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

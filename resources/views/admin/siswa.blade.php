@@ -73,6 +73,12 @@
                     <span>Mata Pelajaran</span></a>
             </li>
 
+            <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('matpel.index')}}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>Tahun Ajaran</span></a>
+            </li>
+
             <li class="nav-item {{ (request()->is('admin/rapor')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('rapor.index')}}">
                     <i class="fas fa-fw fa-user-graduate"></i>

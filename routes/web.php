@@ -5,6 +5,7 @@ use App\Http\Controllers\NilaiSiswaController;
 use App\Http\Controllers\RaporController;
 use App\Http\Controllers\RaporDetailController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\UpdatePasswordController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,7 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
     Route::resource('rapor-detail', RaporDetailController::class);
+    Route::resource('tahun-ajaran', TahunAjaranController::class);
     Route::delete('rapor-detail/{matpelId}/{siswaId}/{tahunId}/{semId}', [
         'as' => 'rapor-detail.destroy',
         'uses' => 'App\Http\Controllers\RaporDetailController@destroy',
@@ -58,13 +60,15 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'uses' => 'App\Http\Controllers\NilaiSiswaController@update',
     ]);
     Route::get('input-nilai', 'App\Http\Controllers\RaporController@input' )->name('input-nilai');
+    
    
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardUserController@index')->name('dashboard');
     Route::resource('password', UpdatePasswordController::class);
-    Route::get('rapor', 'App\Http\Controllers\LihatRaporController@index')->name('lihat-rapor');
+    Route::get('rapor', 'App\Http\Controllers\LihatRaporController@index')->name('rapor');
+    Route::get('lihat-rapor', 'App\Http\Controllers\LihatRaporController@rapor')->name('lihat-rapor');
 });
 
 

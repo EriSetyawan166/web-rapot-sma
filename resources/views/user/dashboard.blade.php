@@ -69,7 +69,7 @@
             </li>
 
             <li class="nav-item {{ (request()->is('user/rapor')) ? 'active' : '' }}">
-                <a class="nav-link " href="{{route('lihat-rapor')}}">
+                <a class="nav-link " href="{{route('rapor')}}">
                     <i class="fa-solid fa-file"></i>
                     <span>Lihat Rapor</span></a>
             </li>

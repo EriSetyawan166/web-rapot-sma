@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Matpel;
 use App\Models\Siswa;
 use App\Models\Nilai;
+use App\Models\TahunAjaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,11 +19,14 @@ class NilaiSiswaController extends Controller
      */
     public function index(Request $request)
     {
+        // @dd($request->all());
+        $data_tahun = TahunAjaran::where('id',$request->tahun)->first();
+        $data_sem = $request->sem;
         $id = $request->kode;
-        $data_nilai = Nilai::where('kode_matpel', '=', $id)->paginate(5);
+        $data_nilai = Nilai::where('kode_matpel', '=', $id)->where('tahun_ajaran_id',$request->tahun)->where('semester', $request->sem)->paginate(5);
         $data_matpel = Matpel::where('kode', '=', $id)->firstOrFail();
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
-        return view('admin.nilai-siswa', compact('siswa', 'data_nilai', 'data_matpel'));
+        return view('admin.nilai-siswa', compact('siswa', 'data_nilai', 'data_matpel', 'data_tahun', 'data_sem'));
     }
 
     /**

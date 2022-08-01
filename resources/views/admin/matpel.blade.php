@@ -71,6 +71,11 @@
                     <i class="fas fa-fw fa-book"></i>
                     <span>Mata Pelajaran</span></a>
             </li>
+            <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
+                <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
+                    <i class="fas fa-fw fa-calendar"></i>
+                    <span>Tahun Ajaran</span></a>
+            </li>
 
             <li class="nav-item {{ (request()->is('admin/rapor')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('rapor.index')}}">

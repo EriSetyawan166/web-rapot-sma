@@ -222,8 +222,7 @@
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>   
-                                                
+                                            <tbody>       
                                                 @foreach ($data_matpel as $dm)
                                                 <tr>
                                                     @php
@@ -241,7 +240,7 @@
                                                         @endphp
                                                         {{-- <td>{{$dn->nil   --}}
                                                     @endif
-                                                        @endforeach
+                                                    @endforeach
                                                         <td>{{$nilai}}</td>        
                                                     <td>{{$ket}}</td> 
                                                     
@@ -250,7 +249,9 @@
                                                     <td> <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#tambah{{$dm->kode}}"><i class="fa-solid fa-plus"></i> Input</button></td>
                                                     @else
                                                     
-                                                    <td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ubah{{$dm->kode}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</button> <button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#hapus{{$dm->kode}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</button></td>
+                                                    <td><div class="d-flex">
+                                                        <button type="button" class="btn btn-warning btn-sm mr-2" data-toggle="modal" data-target="#ubah{{$dm->kode}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</button> <button type="button" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#hapus{{$dm->kode}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</button>
+                                                    </div></td>
                                                     @endif
                                                    
                                                     
