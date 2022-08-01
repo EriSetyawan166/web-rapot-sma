@@ -18,6 +18,7 @@ return new class extends Migration
             $table->String('nisn', 10)->index();
             $table->string('nama', 50);
             $table->string('alamat', 50)->nullable();
+            $table->string('kelas',50);
             $table->timestamps();
             $table->primary('nisn');
         });

@@ -9,7 +9,7 @@ class Matpel extends Model
 {
     protected $table = "matpel";
     protected $primaryKey = "kode";
-    protected $fillable = ['kode','nama','kkm', 'kelompok'];
+    protected $fillable = ['kode','nama','kkm', 'kelompok','kelas'];
     public $incrementing = false;
     use HasFactory;
 

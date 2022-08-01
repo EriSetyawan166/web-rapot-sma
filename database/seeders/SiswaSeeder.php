@@ -18,6 +18,7 @@ class SiswaSeeder extends Seeder
         DB::table('siswa')->insert([
             'nisn' => 1,
             'nama' => 'admin',
+            'kelas' => '0',
         ]);
     }
 }

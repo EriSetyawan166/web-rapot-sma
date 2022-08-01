@@ -238,7 +238,7 @@
                                                     <th>Nama Matpel</th>
                                                     <th>KKM</th>
                                                     <th>Kelompok</th>
-                                                    <th>Option</th>
+                                                    <th>Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

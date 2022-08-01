@@ -222,6 +222,20 @@
                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+">
                                                 </div>
                                                 <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%" name="kelas" id="kelas" required>
+                                                        <option selected disabled value="">Pilih Kelas</option>
+                                                        <option value="X MIPA 1">X MIPA 1</option>
+                                                        <option value="X MIPA 2">X MIPA 2</option>
+                                                        <option value="X MIPA 3">X MIPA 3</option>
+                                                        <option value="XI MIPA 1">XI MIPA 1</option>
+                                                        <option value="XI MIPA 2">XI MIPA 2</option>
+                                                        <option value="XI MIPA 3">XI MIPA 3</option>
+                                                        <option value="XII MIPA 1">XII MIPA 1</option>
+                                                        <option value="XII MIPA 2">XII MIPA 2</option>
+                                                        <option value="XII MIPA 3">XII MIPA 3</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
                                                     <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat"></textarea>
                                                 </div>
@@ -246,6 +260,7 @@
                                                     <th>NISN</th>
                                                     <th>Username</th>
                                                     <th>Nama</th>
+                                                    <th>Kelas</th>
                                                     <th>Alamat</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -262,6 +277,7 @@
                                                         <td>{{$sw->siswa->nisn}}</td>
                                                         <td>{{$sw->username}}</td>
                                                         <td>{{$sw->siswa->nama}}</td>
+                                                        <td>{{$sw->siswa->kelas}}</td>
                                                         <td>{{$sw->siswa->alamat}}</td>
                                                         <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
                                                             <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
@@ -315,6 +331,20 @@
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" value="{{$sw->siswa->nama}}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <select class="form-control select2" style="width: 100%" name="kelas" id="kelas" required>
+                                                                        <option selected disabled value="">Pilih Kelas</option>
+                                                                        <option @if ($sw->siswa->kelas == "X MIPA 1") echo @selected(true) @endif value="X MIPA 1">X MIPA 1</option>
+                                                                        <option @if ($sw->siswa->kelas == "X MIPA 2") echo @selected(true) @endif value="X MIPA 2">X MIPA 2</option>
+                                                                        <option @if ($sw->siswa->kelas == "X MIPA 3") echo @selected(true) @endif value="X MIPA 3">X MIPA 3</option>
+                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 1") echo @selected(true) @endif value="XI MIPA 1">XI MIPA 1</option>
+                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 2") echo @selected(true) @endif value="XI MIPA 2">XI MIPA 2</option>
+                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 3") echo @selected(true) @endif value="XI MIPA 3">XI MIPA 3</option>
+                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 1") echo @selected(true) @endif value="XII MIPA 1">XII MIPA 1</option>
+                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 2") echo @selected(true) @endif value="XII MIPA 2">XII MIPA 2</option>
+                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 3") echo @selected(true) @endif value="XII MIPA 3">XII MIPA 3</option>
+                                                                    </select>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}

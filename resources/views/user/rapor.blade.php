@@ -150,7 +150,7 @@
                                             <td style="width: 15%">Nama Sekolah</td>
                                             <td style="width: 63%">: SMAN 87 Jakarta</td>
                                             <td>Kelas</td>
-                                            <td>: XII MIPA 2</td>
+                                            <td>: {{$data_siswa->kelas}}</td>
                                         </tbody>
                                         <tbody>
                                             <td>Alamat</td>

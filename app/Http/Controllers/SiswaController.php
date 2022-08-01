@@ -47,7 +47,7 @@ class SiswaController extends Controller
         if ($data_siswa) {
             return back()->with('info', 'Duplikat data (Data NISN sudah terdaftar di dalam sistem)');
         }
-
+        $siswa->kelas = $request->kelas;
         $siswa->nisn = $request->nisn;
         $siswa->nama = $request->nama;
         $siswa->alamat = $request->alamat;
