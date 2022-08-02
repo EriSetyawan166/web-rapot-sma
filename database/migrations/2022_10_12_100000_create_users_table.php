@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('role_id')->default('0');
             $table->string('nisn_siswa')->nullable();
             $table->foreign('nisn_siswa')->references('nisn')->on('siswa')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('nip_guru')->nullable();
+            $table->foreign('nip_guru')->references('nip')->on('guru')->onDelete('cascade')->onUpdate('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

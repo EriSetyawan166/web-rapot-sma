@@ -55,7 +55,11 @@ class AuthController extends Controller
 
                 if ($session->role_id == 1) {
                     return redirect()->intended('admin\dashboard')->with('success', 'Selamat Datang '. $session->siswa->nama);
-                } else{
+                } 
+                if($session->role_id == 2){
+                    return redirect()->intended('guru\dashboard')->with('success', 'Selamat Datang '. $session->guru->nama);
+                }
+                else{
                     return redirect()->intended('user\dashboard')->with('success', 'Selamat Datang '. $session->siswa->nama);
                 }
 

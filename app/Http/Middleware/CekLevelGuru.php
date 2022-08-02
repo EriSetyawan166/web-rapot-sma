@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CekLevelUser
+class CekLevelGuru
 {
     /**
      * Handle an incoming request.
@@ -20,8 +20,8 @@ class CekLevelUser
         if($level == 1) {
             return redirect()->intended('admin\dashboard');
         }
-        if($level == 2) {
-            return redirect()->intended('guru\dashboard');
+        if($level == 0) {
+            return redirect()->intended('user\dashboard');
         }
         return $next($request);
     }

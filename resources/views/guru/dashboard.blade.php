@@ -82,12 +82,6 @@
                     <i class="fas fa-fw fa-book"></i>
                     <span>Mata Pelajaran</span></a>
             </li>
-            <li class="nav-item {{ (request()->is('pengajaran')) ? 'active' : '' }}">
-
-                <a class="nav-link " href="{{route('pengajaran.index')}}">
-                    <i class="fas fa-fw fa-book-open-reader"></i>
-                    <span>Data Pengajaran</span></a>
-            </li>
             <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
                     <i class="fas fa-fw fa-calendar"></i>
@@ -166,9 +160,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$guru->nama}}</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src={{asset('img/undraw_profile.svg')}}>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -203,48 +197,12 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Selamat Datang, {{$siswa->nama}}</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Selamat Datang, {{$guru->nama}}</h1>
                     </div>
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Siswa</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_siswa}}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas-solid fas fa-user fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Mata Pelajaran</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$total_matpel}}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fa-solid fas fa-book fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
+                        
                     </div>
 
                     <!-- Content Row -->

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Siswa;
+use App\Models\Guru;
+use App\Models\GuruDetail;
+use App\Models\Matpel;
 use Illuminate\Support\Facades\Auth;
-class SiswaController extends Controller
+
+class PengajaranController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +18,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
+        $matpel = Matpel::all();
+        $guru = Guru::all();
+        $data_pengajaran = GuruDetail::paginate(5);
         $siswa = Siswa::where('nisn','=',Auth::user()->nisn_siswa)->firstOrFail();
-        $data_siswa = User::where('role_id','0')->paginate(6);
-        // @dd($data_siswa);
-
-
-        return view('admin.siswa',compact('siswa', 'data_siswa'));
+        return view('admin.pengajaran', compact('siswa','guru','matpel','data_pengajaran'));
     }
 
     /**
@@ -41,24 +43,16 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-
-        $siswa = new Siswa();
-        $user = new User();
-        $data_siswa = Siswa::where('nisn', '=', $request->nisn)->first();
-        if ($data_siswa) {
-            return back()->with('info', 'Duplikat data (Data NISN sudah terdaftar di dalam sistem)');
+        // @dd($request->all());
+        $guru_detail = GuruDetail::all();
+        $data_matpel = GuruDetail::where('guru_nip',$request->guru)->where('matpel_id',$request->matpel)->first();
+        if ($data_matpel) {
+            return back()->with('info', 'Duplikat data (Data Pengajaran sudah terdaftar di dalam sistem)');
         }
-        $siswa->kelas = $request->kelas;
-        $siswa->nisn = $request->nisn;
-        $siswa->nama = $request->nama;
-        $siswa->alamat = $request->alamat;
-        $user->username = $request->username;
-        $user->password = bcrypt($request->password);
-        $user->nisn_siswa = $request->nisn;
-
-
-        $siswa->save();
-        $user->save();
+        $data = new guruDetail();
+        $data->guru_nip = $request->guru;
+        $data->matpel_id = $request->matpel;
+        $data->save();
         return back()->with('success', 'Data Berhasil ditambah');
 
 
@@ -83,7 +77,7 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -95,12 +89,7 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $siswa = Siswa::findorfail($id);
-        $pass = bcrypt($request->password);
-        $user = User::where('nisn_siswa', '=', $id)->update(array('username' => $request->username, 'password' => $pass));
-
-        $siswa->update($request->all());
-        return back()->with('success', 'Data Berhasil Diubah!');
+        //
     }
 
     /**
@@ -109,11 +98,11 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($matpel_id, $nip)
     {
-        // @dd($id);
-        $siswa = Siswa::where('nisn','=',$id)->firstOrFail();
-        $siswa->delete();
+        // @dd($nip,$matpel_id);
+        $guru_detail = GuruDetail::where('matpel_id',$matpel_id)->where('guru_nip',$nip)->firstOrFail();
+        $guru_detail->delete();
         return back()->with('info', 'Data Berhasil Dihapus');
     }
 }

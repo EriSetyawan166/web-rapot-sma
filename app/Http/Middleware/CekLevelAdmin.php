@@ -20,6 +20,9 @@ class CekLevelAdmin
         if($level == 0) {
             return redirect()->intended('user\dashboard');
         }
+        if($level == 2) {
+            return redirect()->intended('guru\dashboard');
+        }
         return $next($request);
     }
 }

@@ -64,6 +64,7 @@
             </li>
 
             <li class="nav-item {{ (request()->is('guru')) ? 'active' : '' }}">
+
                 <a class="nav-link " href="{{route('guru.index')}}">
                     <i class="fas fa-fw fa-user-group"></i>
                     <span>Guru</span></a>
@@ -75,7 +76,6 @@
                     <i class="fas fa-fw fa-user"></i>
                     <span>Siswa</span></a>
             </li>
-            
 
             <li class="nav-item {{ (request()->is('matpel')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('matpel.index')}}">
@@ -87,15 +87,14 @@
                 <a class="nav-link " href="{{route('pengajaran.index')}}">
                     <i class="fas fa-fw fa-book-open-reader"></i>
                     <span>Data Pengajaran</span></a>
-            </li>   
-
+            </li>
             <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
                     <i class="fas fa-fw fa-calendar"></i>
                     <span>Tahun Ajaran</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('admin/rapor')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('rapor')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('rapor.index')}}">
                     <i class="fas fa-fw fa-user-graduate"></i>
                     <span>Rapor</span></a>
@@ -167,7 +166,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{session('nama')}}</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{$siswa->nama}}</span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -203,192 +202,122 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Rapor</h1>
-                    </div>
-
                     <!-- Content Row -->
-
                     <div class="row">
-
-                        <div class="col-xl-6">
+                        <div class="col-xl-12">
                             <div class="card shadow mb-4">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Nilai Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Pengajaran</h6>
                                 </div>
+                                <!-- Card Body -->
                                 <div class="card-body">
-                                    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Nilai</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Data Pengajaran</button>
 
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Data Nilai Siswa</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pengajaran</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <form action="{{route('input-nilai')}}" method="GET">
-                                            
+                                        <form action="{{route('pengajaran.store')}}" method="POST">
+                                            @csrf
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="nisn" id="nisn" required>
-                                                        <option selected disabled value="">Pilih Siswa</option>
-                                                        @foreach ($data_siswa as $item)
-                                                        @if ($item->nama == 'admin' )
-                                                            @continue
-                                                        @endif
-                                                        <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
+                                                    <select class="form-control select2" style="width: 100%" name="guru" id="guru" required>
+                                                        <option selected disabled value="">Pilih Guru</option>
+                                                        @foreach ($guru as $item)
+                                                            <option value="{{$item->nip}}">{{$item->nama}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
-
+                                                <div class="form-group">
+                                                    <select class="form-control select2" style="width: 100%" name="matpel" id="matpel" required>
+                                                        <option selected disabled value="">Pilih Matpel</option>
+                                                        @foreach ($matpel as $item)
+                                                            <option value="{{$item->kode}}">{{$item->nama}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                <button type="submit" class="btn btn-primary">Tampilkan</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
                                             </div>
                                         </form>
 
                                     </div>
+                                    </div>
+                                    <div class="table-responsive mt-3">
+                                        <table id="datatablesSimple" class="table table-bordered">
+                                            <thead>
+                                                <tr width="100%">
+                                                    <th width="5%">No</th>
+                                                    <th>Guru</th>
+                                                    <th>Matpel</th>
+                                                    <th width="10%">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>@foreach ($data_pengajaran as $dp)
+                                                
+                                                <tr>
+                                                    <td>{{(($data_pengajaran->currentPage() - 1) * $data_pengajaran->perPage() + $loop->iteration)}}</td>
+                                                    <td>{{$dp->guru->nama}}</td>
+                                                    <td>{{$dp->matpel->nama}}</td>
+                                                    <td class="d-flex justify-content-left">
+                                                        <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_data{{$dp->id}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                    
+
+                                                @foreach ($data_pengajaran as $dp)
+                                                <div class="modal fade" id="hapus_data{{$dp->id}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Hapus data?</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Apakah Anda yakin ingin menghapus data?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                            <form action="{{url('admin/pengajaran')}}/{{$dp->matpel_id}}/{{$dp->guru_nip}}" method="POST">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="_method" value="DELETE">
+                                                                <button class="btn btn-danger" type="submit">hapus</button>
+                                                            </form>
+
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                
+
+                                                @endforeach
+
+
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {{-- <div class="card-footer">
+                                        {{$data_siswa->links()}}
                                     </div> --}}
-                                    <form action="{{route('input-nilai')}}">
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="nisn" id="nisn" required>
-                                                <option selected disabled value="">Pilih Siswa</option>
-                                                @foreach ($data_siswa as $item)
-                                                @if ($item->nama == 'admin' )
-                                                    @continue
-                                                @endif
-                                                <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="tahun" id="tahun" required>
-                                                <option selected disabled value="">Pilih Tahun Ajaran</option>
-                                                @foreach ($data_tahun as $item)
-                                                <option value="{{ $item->id}}">{{$item->tahun}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="sem" id="sem" required>
-                                                <option selected disabled value="">Pilih Semester</option>
-                                               
-                                                <option value="1">1 - Ganjil</option>
-                                                <option value="2">2 - Genap</option>
-                                                
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary" >
-                                            Tampilkan
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Rapot Siswa</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{route('rapor-detail.index')}}">
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="id" id="id">
-                                                <option selected disabled value="">Pilih Siswa</option>
-                                                @foreach ($data_siswa as $item)
-                                                @if ($item->nama == 'admin' )
-                                                    @continue
-                                                @endif
-                                                <option value="{{ $item->nisn}}">{{$item->nisn}} - {{ $item->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="tahun" id="tahun" required>
-                                                <option selected disabled value="">Pilih Tahun Ajaran</option>
-                                                @foreach ($data_tahun as $item)
-                                                <option value="{{ $item->id}}">{{$item->tahun}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="sem" id="sem" required>
-                                                <option selected disabled value="">Pilih Semester</option>
-                                               
-                                                <option value="1">1 - Ganjil</option>
-                                                <option value="2">2 - Genap</option>
-                                                
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary" >
-                                            Tampilkan
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xl-6">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Pilih Berdasarkan Mata Pelajaran</h6>
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{route('nilai-siswa.index')}}">
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="kode" id="kode">
-                                                <option selected disabled value="">Pilih Mata Pelajaran</option>
-                                                @foreach ($data_matpel as $item)
-                                                <option value="{{ $item->kode}}">{{$item->kode}} - {{ $item->nama}}</option>
-                                                @endforeach
-                                            </select>
-                                            
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="tahun" id="tahun" required>
-                                                <option selected disabled value="">Pilih Tahun Ajaran</option>
-                                                @foreach ($data_tahun as $item)
-                                                <option value="{{ $item->id}}">{{$item->tahun}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <select class="form-control select2 mx-auto" style="width: 100%" name="sem" id="sem" required>
-                                                <option selected disabled value="">Pilih Semester</option>
-                                               
-                                                <option value="1">1 - Ganjil</option>
-                                                <option value="2">2 - Genap</option>
-                                                
-                                            </select>
-                                        </div>
-                                        <button class="btn btn-primary">
-                                            Tampilkan
-                                        </button>
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-
 
                     <!-- Content Row -->
 

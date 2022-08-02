@@ -60,16 +60,29 @@
                     <span>Dashboard</span></a>
             </li>
 
+            <li class="nav-item {{ (request()->is('guru')) ? 'active' : '' }}">
+
+                <a class="nav-link " href="{{route('guru.index')}}">
+                    <i class="fas fa-fw fa-user-group"></i>
+                    <span>Guru</span></a>
+            </li>
             <li class="nav-item {{ (request()->is('siswa')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('siswa.index')}}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Siswa</span></a>
             </li>
+            
 
             <li class="nav-item {{ (request()->is('admin/matpel')) ? 'active' : '' }}">
                 <a class="nav-link " href="">
                     <i class="fas fa-fw fa-book"></i>
                     <span>Mata Pelajaran</span></a>
+            </li>
+            <li class="nav-item {{ (request()->is('admin/pengajaran')) ? 'active' : '' }}">
+
+                <a class="nav-link " href="{{route('pengajaran.index')}}">
+                    <i class="fas fa-fw fa-book-open-reader"></i>
+                    <span>Data Pengajaran</span></a>
             </li>
             <li class="nav-item {{ (request()->is('admin/tahun-ajaran')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('tahun-ajaran.index')}}">

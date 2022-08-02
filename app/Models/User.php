@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'role_id',
         'nisn_siswa',
+        'nip_guru',
     ];
 
     /**
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'nisn_siswa','nisn');
+    }
+
+    public function Guru()
+    {
+        return $this->belongsTo(Guru::class, 'nip_guru','nip');
     }
 }

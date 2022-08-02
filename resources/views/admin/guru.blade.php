@@ -61,11 +61,11 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item {{ (request()->is('guru')) ? 'active' : '' }}">
+            <li class="nav-item {{ (request()->is('admin/guru')) ? 'active' : '' }}">
 
                 <a class="nav-link " href="{{route('guru.index')}}">
-                    <i class="fas fa-fw fa-user-group"></i>
-                    <span>Guru</span></a>
+                <i class="fas fa-fw fa-user-group"></i>
+                <span>Guru</span></a>
             </li>
             <li class="nav-item {{ (request()->is('admin/siswa')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('siswa.index')}}">
@@ -85,6 +85,7 @@
                     <i class="fas fa-fw fa-book-open-reader"></i>
                     <span>Data Pengajaran</span></a>
             </li>
+
             <li class="nav-item {{ (request()->is('tahun-ajaran')) ? 'active' : '' }}">
                 <a class="nav-link " href="{{route('tahun-ajaran.index')}}">
                     <i class="fas fa-fw fa-calendar"></i>
@@ -197,7 +198,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Siswa</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Guru</h1>
                     </div>
 
                     <div class="row">
@@ -206,99 +207,75 @@
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Data Siswa</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Data Guru</h6>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Siswa</button>
-
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus"></i> Tambah Guru</button>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Data Siswa</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                            </button>
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Guru</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{route('guru.store')}}" method="POST">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <input type="text" id="nip" name="nip" placeholder="Masukkan nomor Kode nip" class="form-control" required autocomplete="off" pattern="[0-9]+" maxlength="5">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" id="username" name="username" placeholder="Masukkan Username" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" id="no_telp" name="no_telp" placeholder="Masukkan no telepon" class="form-control" required autocomplete="off" maxlength="13" pattern="[0-9]+">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" id="pass" name="pass" placeholder="Masukkan Password" class="form-control" required autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                                </div>
+                                                </div>
+                                            </form>
+    
                                         </div>
-                                        <form action="{{route('siswa.store')}}" method="POST">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" pattern="[0-9]+">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+">
-                                                </div>
-                                                <div class="form-group">
-                                                    <select class="form-control select2" style="width: 100%" name="kelas" id="kelas" required>
-                                                        <option selected disabled value="">Pilih Kelas</option>
-                                                        <option value="X MIPA 1">X MIPA 1</option>
-                                                        <option value="X MIPA 2">X MIPA 2</option>
-                                                        <option value="X MIPA 3">X MIPA 3</option>
-                                                        <option value="XI MIPA 1">XI MIPA 1</option>
-                                                        <option value="XI MIPA 2">XI MIPA 2</option>
-                                                        <option value="XI MIPA 3">XI MIPA 3</option>
-                                                        <option value="XII MIPA 1">XII MIPA 1</option>
-                                                        <option value="XII MIPA 2">XII MIPA 2</option>
-                                                        <option value="XII MIPA 3">XII MIPA 3</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
-                                                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="password" id="password" name="password" placeholder="Masukkan password" class="form-control" required autocomplete="off">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                <button type="submit" class="btn btn-primary">Simpan</button>
-                                            </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
-                                    </div>
-                                    <div class="table-responsive mt-3">
-                                        <table id="datatablesSimple" class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>NISN</th>
-                                                    <th>Username</th>
-                                                    <th>Nama</th>
-                                                    <th>Kelas</th>
-                                                    <th>Alamat</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-
-                                                @foreach ($data_siswa as $sw)
-                                                @if ($sw->username == 'admin' )
-                                                            @continue
-                                                        @endif
+                                        </div>
+                                        <div class="table-responsive mt-3">
+                                            <table id="datatablesSimple" class="table table-bordered">
+                                                <thead>
                                                     <tr>
-                                                        <td>{{(($data_siswa->currentPage() - 1) * $data_siswa->perPage() + $loop->iteration)}}</td>
-                                                        <td>{{$sw->siswa->nisn}}</td>
-                                                        <td>{{$sw->username}}</td>
-                                                        <td>{{$sw->siswa->nama}}</td>
-                                                        <td>{{$sw->siswa->kelas}}</td>
-                                                        <td>{{$sw->siswa->alamat}}</td>
-                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
-                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_siswa{{$sw->siswa->nisn}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
+                                                        <th>No</th>
+                                                        <th>NIP</th>
+                                                        <th>Username</th>
+                                                        <th>Nama</th>
+                                                        <th>No telepon</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($data_guru as $dg)
+                                                    <tr>
+                                                        <td>{{(($data_guru->currentPage() - 1) * $data_guru->perPage() + $loop->iteration)}}</td>
+                                                        <td>{{$dg->guru->nip}}</td>
+                                                        <td>{{$dg->username}}</td>
+                                                        <td>{{$dg->guru->nama}}</td>
+                                                        <td>{{$dg->guru->no_telp}}</td>
+                                                        <td class="d-flex justify-content-left"><a href="" class="btn btn-warning btn-sm mr-1" data-toggle="modal" data-target="#ubah_guru{{$dg->guru->nip}}"><i class="fa-solid fa-pen to-square mr-1"></i>Ubah</a>
+                                                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_guru{{$dg->guru->nip}}"><i class="fa-solid fa-trash to-square mr-1"></i>Hapus</a>
                                                         </td>
                                                     </tr>
-                                                @endforeach
-
-                                                @foreach ($data_siswa as $sw)
-                                                <div class="modal fade" id="hapus_siswa{{$sw->siswa->nisn}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
+                                                    @endforeach
+                                                    @foreach ($data_guru as $dg)
+                                                <div class="modal fade" id="hapus_guru{{$dg->guru->nip}}" tabindex="-1" role="dialog" aria-labelledby="hapus-siswa" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
@@ -312,7 +289,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
-                                                            <form action="{{url('admin/siswa', $sw->siswa->nisn)}}" method="POST">
+                                                            <form action="{{url('admin/guru', $dg->guru->nip)}}" method="POST">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="_method" value="DELETE">
                                                                 <button class="btn btn-danger" type="submit">hapus</button>
@@ -323,47 +300,32 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="modal fade" id="ubah_siswa{{$sw->siswa->nisn}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal fade" id="ubah_guru{{$dg->guru->nip}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data Siswa</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Ubah Data guru</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="{{url('admin/siswa')}}/{{$sw->siswa->nisn}}" method="POST">
+                                                        <form action="{{url('admin/guru')}}/{{$dg->guru->nip}}" method="POST">
                                                             @csrf
                                                             <div class="modal-body">
                                                                 <div class="form-group">
-                                                                    <input type="text" id="nisn" name="nisn" placeholder="Masukkan nomor NISN" class="form-control" maxlength="10" required autocomplete="off" pattern="[0-9]+" value="{{$sw->siswa->nisn}}">
+                                                                    <input type="text" id="nip" name="nip" placeholder="Masukkan nomor Kode nip" class="form-control" required autocomplete="off" pattern="[0-9]+" maxlength="5" value="{{$dg->guru->nip}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" id="username" name="username" placeholder="Masukkan username" class="form-control" required autocomplete="off" value="{{$sw->username}}">
+                                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan Nama" class="form-control" required autocomplete="off" pattern="[a-zA-Z' ]+" value="{{$dg->guru->nama}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama" class="form-control" required autocomplete="off" value="{{$sw->siswa->nama}}">
+                                                                    <input type="text" id="username" name="username" placeholder="Masukkan Username" class="form-control" required autocomplete="off" value="{{$dg->username}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <select class="form-control select2" style="width: 100%" name="kelas" id="kelas" required>
-                                                                        <option selected disabled value="">Pilih Kelas</option>
-                                                                        <option @if ($sw->siswa->kelas == "X MIPA 1") echo @selected(true) @endif value="X MIPA 1">X MIPA 1</option>
-                                                                        <option @if ($sw->siswa->kelas == "X MIPA 2") echo @selected(true) @endif value="X MIPA 2">X MIPA 2</option>
-                                                                        <option @if ($sw->siswa->kelas == "X MIPA 3") echo @selected(true) @endif value="X MIPA 3">X MIPA 3</option>
-                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 1") echo @selected(true) @endif value="XI MIPA 1">XI MIPA 1</option>
-                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 2") echo @selected(true) @endif value="XI MIPA 2">XI MIPA 2</option>
-                                                                        <option @if ($sw->siswa->kelas == "XI MIPA 3") echo @selected(true) @endif value="XI MIPA 3">XI MIPA 3</option>
-                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 1") echo @selected(true) @endif value="XII MIPA 1">XII MIPA 1</option>
-                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 2") echo @selected(true) @endif value="XII MIPA 2">XII MIPA 2</option>
-                                                                        <option @if ($sw->siswa->kelas == "XII MIPA 3") echo @selected(true) @endif value="XII MIPA 3">XII MIPA 3</option>
-                                                                    </select>
+                                                                    <input type="text" id="no_telp" name="no_telp" placeholder="Masukkan no telepon" class="form-control" required autocomplete="off" maxlength="13" pattern="[0-9]+" value="{{$dg->guru->no_telp}}">
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    {{-- <label for="alamat" class="col-form-label" name="alamat" id="alamat">Alamat:</label> --}}
-                                                                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Masukkan alamat">{{$sw->siswa->alamat}}</textarea>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <input type="password" id="password" name="password" placeholder="Masukkan password baru" class="form-control" required autocomplete="off">
+                                                                    <input type="password" id="pass" name="pass" placeholder="Masukkan Password" class="form-control" required autocomplete="off">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -378,15 +340,10 @@
 
 
                                                 @endforeach
-
-
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="card-footer">
-                                        {{$data_siswa->links()}}
-                                    </div>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MataPelajaranController;
 use App\Http\Controllers\NilaiSiswaController;
+use App\Http\Controllers\PengajaranController;
 use App\Http\Controllers\RaporController;
 use App\Http\Controllers\RaporDetailController;
 use App\Http\Controllers\SiswaController;
@@ -38,6 +40,8 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
     Route::resource('siswa', SiswaController::class);
     Route::resource('matpel', MataPelajaranController::class);
     Route::resource('rapor', RaporController::class);
+    Route::resource('guru',GuruController::class);
+    Route::resource('pengajaran', PengajaranController::class);
     Route::resource('rapor-detail', RaporDetailController::class);
     Route::resource('tahun-ajaran', TahunAjaranController::class);
     Route::delete('rapor-detail/{matpelId}/{siswaId}/{tahunId}/{semId}', [
@@ -60,15 +64,23 @@ Route::group(['middleware' => ['auth', 'cekleveladmin', 'sweetalert'], 'prefix' 
         'uses' => 'App\Http\Controllers\NilaiSiswaController@update',
     ]);
     Route::get('input-nilai', 'App\Http\Controllers\RaporController@input' )->name('input-nilai');
-    
+    Route::delete('pengajaran/{matpelId}/{guruId}', [
+        'as' => 'pengajaran.destroy',
+        'uses' => 'App\Http\Controllers\PengajaranController@destroy',
+    ]);
    
 });
 
 Route::group(['middleware' => ['auth','cekleveluser', 'sweetalert'], 'prefix' => 'user'], function(){
     Route::get('dashboard', 'App\Http\Controllers\DashboardUserController@index')->name('dashboard');
     Route::resource('password', UpdatePasswordController::class);
+    
     Route::get('rapor', 'App\Http\Controllers\LihatRaporController@index')->name('rapor');
     Route::get('lihat-rapor', 'App\Http\Controllers\LihatRaporController@rapor')->name('lihat-rapor');
+});
+
+Route::group(['middleware' => ['auth','ceklevelguru', 'sweetalert'], 'prefix' => 'guru'], function(){
+    Route::get('dashboard', 'App\Http\Controllers\DashboardGuruController@index')->name('dashboard');
 });
 
 
