@@ -65,6 +65,12 @@ Seeder table User dan siswa
 ```bash
 php artisan db:seed
 ```
+
+Update Composer
+```bash
+composer update
+```
+
 Menjalankan aplikasi
 ```bash
 php artisan serve
